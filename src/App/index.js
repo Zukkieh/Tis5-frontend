@@ -1,17 +1,18 @@
-import React from 'react';
-import {BrowserRoute as Router, Route, Link} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { Button } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>SGM</h1>
-      </header>
-    </div>
-  );
+import login from './templates/login/login';
+import cadastro from './templates/cadastro/cadastro';
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Route exact path="/" component={login} />
+        <Route exact path="/cadastro" component={cadastro} />
+      </Router>
+    );
+  }
 }
 
 export default App;
