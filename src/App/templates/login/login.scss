@@ -4,7 +4,7 @@
   height: 100%;
   font-family: "ms-jhenghei-bold";
   align-items: center;
-
+  
   & .title {
     margin: 0;
     margin-top: 49px;
@@ -80,6 +80,7 @@
       height: 65px;
       color: white;
       font-size: 30px;
+      transition: 0.2s;
       background-color: #00df1e;
       cursor: pointer;
 
@@ -87,11 +88,17 @@
         outline: none;
         border: none;
       }
+
+      &:hover{
+        background-color: #07a11b;
+      }
     }
 
     & .cadastroLink {
       margin-bottom: 49px;
       cursor: pointer;
+      transition: 0.2s;
+      color: #6A6A6A;
       &:after {
         content: "";
         position: absolute;
@@ -103,6 +110,10 @@
         background-image: url("../../assets/icons/arrow-right.svg");
         background-repeat: no-repeat;
         background-size: 17px 10px;
+      }
+
+      &:hover{
+        color: rgb(39, 39, 39);
       }
     }
   }

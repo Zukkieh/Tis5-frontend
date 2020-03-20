@@ -8,11 +8,18 @@
         margin:0 !important;
         font-size: 102px;
         font-family: "ms-yahei-bold";
+
+        @media (max-width: 992px){
+            font-size: 80px;
+        }
        
     }
     & label{
         font-family: "ms-yahei-bold";
         font-size: 20px;
+        @media (max-width: 992px){
+            font-size: 14px;
+        }
         
     }
 }

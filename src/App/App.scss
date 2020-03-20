@@ -6,6 +6,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px 0;
 }
 .container{
     width: 92%;
@@ -14,4 +15,10 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    @media (max-width: 992px){
+        flex-flow: column;
+        width: auto;
+        padding: 45px 44px;
+    }
 }
