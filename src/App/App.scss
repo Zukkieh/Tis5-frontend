@@ -7,6 +7,10 @@ body{
     justify-content: center;
     align-items: center;
     padding: 10px 0;
+    width: 100%;
+    @media (max-width: 992px) {
+       padding: 47px 0;
+    }
 }
 .container{
     width: 92%;
@@ -19,6 +23,7 @@ body{
     @media (max-width: 992px){
         flex-flow: column;
         width: auto;
-        padding: 45px 44px;
+        padding: 0 45px;
+        
     }
 }
