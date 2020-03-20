@@ -1,0 +1,18 @@
+.logo{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    color: #707070;
+    & h1{
+        margin:0 !important;
+        font-size: 102px;
+        font-family: "ms-yahei-bold";
+       
+    }
+    & label{
+        font-family: "ms-yahei-bold";
+        font-size: 20px;
+        
+    }
+}

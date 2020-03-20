@@ -1,0 +1,109 @@
+.login {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  font-family: "ms-jhenghei-bold";
+  align-items: center;
+
+  & .title {
+    margin: 0;
+    margin-top: 49px;
+    color: #707070;
+    font-size: 42px;
+  }
+
+  & div.form {
+    margin-top: 82px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+
+    & input {
+      width: 314px;
+      height: 65px;
+      border-radius: 35px;
+      background-color: #c8c8c8;
+      border: none;
+      padding-left: 73px;
+      padding-right: 20px;
+      font-size: 20px;
+      transition: 0.2s;
+      color: #6a6a6a;
+      &::placeholder {
+        color: #6a6a6a;
+      }
+
+      &:focus {
+        border: none;
+        outline: none;
+        color: black;
+      }
+
+      &:first-of-type {
+        margin-bottom: 26px;
+      }
+    }
+
+    & .icon-user:before {
+      content: "";
+      position: absolute;
+      margin-left: 32px;
+      margin-top: 20px;
+      display: block;
+      width: 50px;
+      height: 50px;
+      background-image: url("../../assets/icons/user.svg");
+      background-repeat: no-repeat;
+      background-size: 24px 25px;
+    }
+
+    & .icon-lock:before {
+      content: "";
+      position: absolute;
+      margin-left: 32px;
+      margin-top: 20px;
+      display: block;
+      width: 50px;
+      height: 50px;
+      background-image: url("../../assets/icons/lock.svg");
+      background-repeat: no-repeat;
+      background-size: 24px 25px;
+    }
+
+    & button {
+      margin-top: 60px;
+      margin-bottom: 20px;
+      border: none;
+      width: 400px;
+      border-radius: 35px;
+      height: 65px;
+      color: white;
+      font-size: 30px;
+      background-color: #00df1e;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+
+    & .cadastroLink {
+      margin-bottom: 49px;
+      cursor: pointer;
+      &:after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        margin-top: 8px;
+        margin-left: 10px;
+        width: 50px;
+        height: 50px;
+        background-image: url("../../assets/icons/arrow-right.svg");
+        background-repeat: no-repeat;
+        background-size: 17px 10px;
+      }
+    }
+  }
+}

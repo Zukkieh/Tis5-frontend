@@ -1,0 +1,17 @@
+body{
+    background: transparent linear-gradient(241deg, #E2BEE1 0%, #7EA7B4 100%) 0% 0% no-repeat padding-box;
+}
+.App{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    width: 92%;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
