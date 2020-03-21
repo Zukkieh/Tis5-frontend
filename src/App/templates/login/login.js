@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './login.scss'
 
 import Logo from '../components/logo/logo'
@@ -17,13 +18,16 @@ class login extends Component {
             </div>
 
             <div className="icon-lock">
-              <input  placeholder="Senha" type="password" />
+              <input placeholder="Senha" type="password" />
             </div>
 
             <button>Logar</button>
-            <div className="cadastroLink">
-              <a>Crie sua conta </a>
+
+            <div className="cadastroLink" onClick={()=> window.open("/cadastro","_self")}>
+
+              <a to="/cadastro">Crie sua conta </a>
             </div>
+
           </div>
         </div>
       </div>
