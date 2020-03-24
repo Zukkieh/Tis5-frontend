@@ -30,11 +30,11 @@ class admin extends Component {
                         </div>
 
                         <div className="item">
-                            <p>Gerenciar Coordenadores</p>
+                            <p>Gerenciar Cursos</p>
                         </div>
 
                         <div className="item">
-                            <p>Gerenciar Cursos</p>
+                            <p>Gerenciar Coordenadores</p>
                         </div>
                     </div>
 
