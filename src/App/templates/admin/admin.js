@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import './admin.scss'
 import Logo from '../components/logo/logo'
+import Admin_Controls from './admin_controls/controls';
 
 class admin extends Component {
+
+    clickCursos(){
+        document.getElementById("cursos").classList.remove("hide");
+        document.getElementById("coordenadores").classList.add("hide");
+    }
+
+    clickCoordenadores(){
+        document.getElementById("cursos").classList.add("hide");
+        document.getElementById("coordenadores").classList.remove("hide");
+        
+    }
+        
     render() {
         return (
             <div className="admin">
@@ -29,45 +42,17 @@ class admin extends Component {
                             <p>Opções do Administrador</p>
                         </div>
 
-                        <div className="item">
+                        <div className="item" onClick={() => this.clickCursos()}>
                             <p>Gerenciar Cursos</p>
                         </div>
 
-                        <div className="item">
+                        <div className="item" onClick={() => this.clickCoordenadores()}>
                             <p>Gerenciar Coordenadores</p>
                         </div>
                     </div>
 
                     <div className="main">
-                        <div className="control">
-                            <div className="icon fa-search">
-                                <input placeholder="Pesquise um coordenador" />
-                            </div>
-                            <div className="icon fa-filter">
-                                <select>
-                                    <option selected>Todos coordenadores</option>
-                                    <option>Coordenadores ativos</option>
-                                    <option>Coordenadores desativados</option>
-                                </select>
-                            </div>
-                            <div className="icon fa-plus">
-                                <button>Novo coordernador</button>
-                            </div>
-                        </div>
-                        <div className="content">
-
-                        </div>
-                        <div className="pagination">
-                            <div className="total_results">
-                                <p>Exibindo 3 de 3 resultados</p>
-                            </div>
-                            <div className="page_select">
-                                <p> <strong>1</strong> - 2 - 3 - 4 - 5</p>
-                            </div>
-                            <div className="nothing">
-
-                            </div>
-                        </div>
+                        <Admin_Controls />
                     </div>
                 </div>
 

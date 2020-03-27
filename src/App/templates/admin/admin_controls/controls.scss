@@ -1,0 +1,113 @@
+.admin_controls {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  & .control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 21px 20px 21px;
+    border-bottom: 1px solid #cbcbcb;
+    @media (max-width: 992px) {
+      flex-flow: column;
+    }
+
+    & .icon {
+      @media (max-width: 992px) {
+        width: 100%;
+      }
+    }
+    & input {
+      border-radius: 15px;
+      background-color: #dbdbdb;
+      border: none;
+      padding: 8px 0 8px 35px;
+      font-size: 15px;
+      font-family: "ms-yahei-bold";
+      width: 421px;
+      color: #707070;
+
+      &:focus {
+        outline: none;
+      }
+
+      @media (max-width: 992px){
+        display: flex;
+        width: calc(100% - 15px);
+        padding: 8px 0 8px 15px;
+        
+      }
+    }
+
+    & select {
+      border-radius: 15px;
+      background-color: #dbdbdb;
+      border: none;
+      padding: 8px 0px 8px 35px;
+      font-size: 15px;
+      font-family: "ms-yahei-bold";
+      color: #707070;
+      appearance: none;
+      width: 233px;
+      &:focus {
+        outline: none;
+      }
+      @media (max-width: 992px){
+        display: flex;
+        width: 100%;
+        padding: 8px 15px;
+        margin: 10px 0;
+      }
+    }
+
+    & button {
+      cursor: pointer;
+      border-radius: 15px;
+      background-color: #28d93f;
+      border: none;
+      font-size: 15px;
+      font-family: "ms-yahei-bold";
+      padding: 8px 35px 8px 20px;
+      color: white;
+      &:focus {
+        outline: none;
+      }
+      @media (max-width: 992px){
+        width: 100%;
+        padding: 8px 15px;
+        display: flex;
+      }
+    }
+  }
+
+  & .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 34px;
+    background-color: #e4eceb;
+    border-radius: 0px 0px 15px 15px;
+    & .nothing {
+      width: 100px;
+    }
+    @media (max-width: 992px){
+      flex-flow: column;
+    }
+  }
+
+  & .results {
+    height: 100%;
+  }
+}
+
+.hide {
+  display: none !important;
+}
+
+#cursos,
+#coordenadores {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  width: 100%;
+}
