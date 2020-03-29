@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 21px 20px 21px;
+    padding: 20px 21px 16px 21px;
     border-bottom: 1px solid #cbcbcb;
     @media (max-width: 992px) {
       flex-flow: column;
@@ -31,11 +31,10 @@
         outline: none;
       }
 
-      @media (max-width: 992px){
+      @media (max-width: 992px) {
         display: flex;
-        width: calc(100% - 15px);
-        padding: 8px 0 8px 15px;
-        
+        width: calc(100% - 35px);
+        padding: 8px 0 8px 35px;
       }
     }
 
@@ -52,11 +51,12 @@
       &:focus {
         outline: none;
       }
-      @media (max-width: 992px){
+      @media (max-width: 992px) {
         display: flex;
         width: 100%;
         padding: 8px 15px;
         margin: 10px 0;
+        padding-left: 35px;
       }
     }
 
@@ -72,10 +72,74 @@
       &:focus {
         outline: none;
       }
-      @media (max-width: 992px){
+      @media (max-width: 992px) {
         width: 100%;
         padding: 8px 15px;
         display: flex;
+      }
+    }
+
+    & .fa-search {
+      &:before {
+        display: inline-block;
+        position: absolute;
+        content: "";
+        background-image: url("../../../assets/icons/search.svg");
+        background-repeat: no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        margin: 10px 0 0 13px;
+      }
+    }
+
+    & .fa-filter {
+      position: relative;
+      &:before {
+        display: inline-block;
+        position: absolute;
+        content: "";
+        background-image: url("../../../assets/icons/filter.svg");
+        background-repeat: no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        margin: 10px 0 0 13px;
+        @media (max-width: 992px){
+          margin: 20px 0 0 13px;
+        }
+      }
+      &:after {
+        display: inline-block;
+        position: absolute;
+        content: "";
+        background-image: url("../../../assets/icons/drop-down.svg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        width: 10px;
+        height: 10px;
+        margin: 18px 0 0 0px;
+        right: 10px;
+        @media (max-width: 992px){
+          top: 8px;
+          margin: 20px 0 0 13px;
+        }
+      }
+    }
+
+    & .fa-plus {
+      position: relative;
+      & button:after {
+        display: inline-block;
+        position: absolute;
+        content: "";
+        background-image: url("../../../assets/icons/plus.svg");
+        background-repeat: no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        margin: 2px 0 0 150px;
+        right: 10px;
       }
     }
   }
@@ -90,7 +154,7 @@
     & .nothing {
       width: 100px;
     }
-    @media (max-width: 992px){
+    @media (max-width: 992px) {
       flex-flow: column;
     }
   }
@@ -110,4 +174,32 @@
   flex-flow: column;
   justify-content: space-between;
   width: 100%;
+}
+
+#cursos .control {
+  & .icon {
+    display: flex;
+    @media (min-width: 992px) {
+      &:first-of-type {
+        width: 80%;
+      }
+      &:last-of-type {
+        width: 20%;
+      }
+    }
+  }
+  & input {
+    width: 90%;
+    @media (max-width: 992px) {
+      margin-bottom: 10px;
+      width: calc(100% - 15px);
+    }
+  }
+
+  & button {
+    width: 100%;
+    @media (max-width: 992px) {
+      width: 100%;
+    }
+  }
 }

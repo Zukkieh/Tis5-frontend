@@ -46,13 +46,7 @@ class admin_controls extends Component {
                         <div className="icon fa-search">
                             <input placeholder="Pesquise um curso" />
                         </div>
-                        <div className="icon fa-filter">
-                            <select>
-                                <option value="all">Todos cursos</option>
-                                <option value="" >Ativos</option>
-                                <option value="" >Desativados</option>
-                            </select>
-                        </div>
+                        
                         <div className="icon fa-plus">
                             <button>Novo curso</button>
                         </div>

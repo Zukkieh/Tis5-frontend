@@ -8,11 +8,15 @@ class admin extends Component {
     clickCursos(){
         document.getElementById("cursos").classList.remove("hide");
         document.getElementById("coordenadores").classList.add("hide");
+        document.getElementsByClassName("item-curso").item(0).classList.add("active");
+        document.getElementsByClassName("item-coordenador").item(0).classList.remove("active");
     }
 
     clickCoordenadores(){
         document.getElementById("cursos").classList.add("hide");
         document.getElementById("coordenadores").classList.remove("hide");
+        document.getElementsByClassName("item-curso").item(0).classList.remove("active");
+        document.getElementsByClassName("item-coordenador").item(0).classList.add("active");
         
     }
         
@@ -42,11 +46,11 @@ class admin extends Component {
                             <p>Opções do Administrador</p>
                         </div>
 
-                        <div className="item" onClick={() => this.clickCursos()}>
+                        <div className="item item-curso" onClick={() => this.clickCursos()}>
                             <p>Gerenciar Cursos</p>
                         </div>
 
-                        <div className="item" onClick={() => this.clickCoordenadores()}>
+                        <div className="item item-coordenador active" onClick={() => this.clickCoordenadores()}>
                             <p>Gerenciar Coordenadores</p>
                         </div>
                     </div>
