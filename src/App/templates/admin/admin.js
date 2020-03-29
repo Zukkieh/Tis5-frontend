@@ -5,21 +5,34 @@ import Admin_Controls from './admin_controls/controls';
 
 class admin extends Component {
 
-    clickCursos(){
+    clickCursos() {
         document.getElementById("cursos").classList.remove("hide");
         document.getElementById("coordenadores").classList.add("hide");
         document.getElementsByClassName("item-curso").item(0).classList.add("active");
         document.getElementsByClassName("item-coordenador").item(0).classList.remove("active");
     }
 
-    clickCoordenadores(){
+    clickCoordenadores() {
         document.getElementById("cursos").classList.add("hide");
         document.getElementById("coordenadores").classList.remove("hide");
         document.getElementsByClassName("item-curso").item(0).classList.remove("active");
         document.getElementsByClassName("item-coordenador").item(0).classList.add("active");
-        
+
     }
-        
+
+    showUserOpcoes() {
+        document.getElementById("opcoes").classList.toggle("hide");
+    }
+
+   
+
+    componentDidMount() {
+        window.addEventListener("click", function (event) {
+            if (event.target.parentNode.parentNode != this.document.getElementsByClassName("user")[0]) {
+                this.document.getElementById("opcoes").classList.add("hide");
+            }
+        })
+    }
     render() {
         return (
             <div className="admin">
@@ -30,12 +43,17 @@ class admin extends Component {
                     <div className="title">
                         Área Administrativa
                     </div>
-                    <div className="user">
+                    <div className="user" onClick={() => this.showUserOpcoes()}>
                         <div>
                             <i className="fa-user" />
                         </div>
-                        <div>
+                        <div id="adm-op" >
                             <p>Administrador</p>
+                            <div id="opcoes" className="hide">
+                                <div>
+                                    sair
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

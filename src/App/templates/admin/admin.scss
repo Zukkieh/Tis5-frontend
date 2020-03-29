@@ -29,6 +29,24 @@
         margin-top: 15px;
       }
     }
+
+    & #adm-op{
+      position: relative;
+      & .hide{
+        display: none;
+      }
+      & #opcoes{
+        background-color: rgb(240, 240, 240);
+        border: 1px solid black;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 120%;
+        top: 40px;
+      }
+
+    }
   }
 
   & .user {
@@ -55,6 +73,7 @@
       }
     }
     & p {
+      margin-bottom: 0;
       &:after {
         content: "";
         position: absolute;
