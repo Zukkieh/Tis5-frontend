@@ -15,13 +15,20 @@ class admin_controls extends Component {
         document.getElementsByClassName('control')[0].classList.remove('hide');
     }
 
+    pesquisaCoordenador() {
+
+        document.getElementsByClassName('results')[0].classList.add('show-loading');
+
+
+    }
+
     render() {
         return (
             <div className="admin_controls">
                 <div id="coordenadores">
                     <div className="control ">
                         <div className="icon fa-search">
-                            <input placeholder="Pesquise um coordenador" />
+                            <input onKeyDown={() => this.pesquisaCoordenador()} placeholder="Pesquise um coordenador" />
                         </div>
                         <div className="icon fa-filter">
                             <select>
@@ -39,6 +46,7 @@ class admin_controls extends Component {
                     <div className="results">
 
                     </div>
+
                     <div className="hide form form-cadastro-coordenador">
                         <form>
                             <div className="header">
@@ -46,13 +54,28 @@ class admin_controls extends Component {
                             </div>
 
                             <div className="body">
-                                <label htmlFor="nome_coordenador">Nome do coordenador</label>
-                                <input id="nome_coordenador" placeholder="Coordenador" />
-                                <label htmlFor="curso_coordenador">Curso do coordernador</label>
-                                <select id="curso_coordenador">
-                                    <option selected value="disabled">Selecione um curso</option>
-                                    
-                                </select>
+                                <div className="column">
+                                    <label htmlFor="nome_coordenador">Nome do coordenador</label>
+                                    <input id="nome_coordenador" placeholder="Coordenador" />
+                                    <label htmlFor="matricula_coordenador">Matrícula</label>
+                                    <input id="matricula_coordenador" placeholder="Matrícula" />
+                                    <label htmlFor="curso_coordenador">Curso do coordernador</label>
+                                    <select id="curso_coordenador">
+                                        <option value="disabled">Selecione um curso</option>
+
+                                    </select>
+                                </div>
+                                <div className="column">
+                                    <label htmlFor="nome_coordenador">Nome do coordenador</label>
+                                    <input id="nome_coordenador" placeholder="Coordenador" />
+                                    <label htmlFor="matricula_coordenador">Matrícula</label>
+                                    <input id="matricula_coordenador" placeholder="Matrícula" />
+                                    <label htmlFor="curso_coordenador">Curso do coordernador</label>
+                                    <select id="curso_coordenador">
+                                        <option value="disabled">Selecione um curso</option>
+
+                                    </select>
+                                </div>
                             </div>
                             <div className="footer">
                                 <button className="cadastrar">Cadastrar</button>
@@ -63,9 +86,10 @@ class admin_controls extends Component {
 
                         </form>
                     </div>
+
                     <div className="pagination">
                         <div className="total_results">
-                            <p>Exibindo 3 de 3 resultados</p>
+                            <p>Exibindo todos os coordenadores</p>
                         </div>
                         <div className="page_select">
                             <p> <strong>1</strong> - 2 - 3 - 4 - 5</p>

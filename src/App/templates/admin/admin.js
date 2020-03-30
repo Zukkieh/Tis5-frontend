@@ -25,9 +25,9 @@ class admin extends Component {
     }
 
     render() {
-        
+
         window.addEventListener("click", function (event) {
-            if (event.target.parentNode.parentNode != this.document.getElementsByClassName("user")[0]) {
+            if (event.target.parentNode.parentNode !== this.document.getElementsByClassName("user")[0]) {
                 this.document.getElementById("opcoes").classList.add("hide");
             }
         })

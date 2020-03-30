@@ -163,24 +163,25 @@
 
   & .results {
     height: 100%;
+    position: relative;
   }
 
   & .form {
     font-family: "ms-yahei";
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-
+    align-items: center;
+    
     & form {
       border: 1px none rgb(158, 158, 158);
-      border-radius: 8px;
+      border-radius: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-flow: column;
-      max-width: 350px;
       width: 100%;
-      padding: 10px 5px 0 5px;
+      height: 100%;
+      background-color: rgb(235, 235, 235);
 
       & .header {
         width: 100%;
@@ -193,28 +194,43 @@
         }
       }
       & .body {
-        width: 75%;
-        & label {
-          font-family: "ms-jhenghei";
-          font-size: 14px;
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        @media(max-width:992px){
+          flex-flow: column;
         }
+        & .column {
+          display: flex;
+          justify-content: flex-start;
+          flex-flow: column;
+          width: 44%;
+          @media(max-width:992px){
+            width: 100%;
+          }
+          & label {
+            font-family: "ms-jhenghei";
+            font-size: 14px;
+          }
 
-        & input {
-          width: calc(100% - 11px);
-        }
-        & select {
-          width: 100%;
-        }
-        & input,
-        select {
-          margin-bottom: 10px;
-          font-size: 15px;
-          border: 1px solid rgb(158, 158, 158);
-          border-radius: 5px;
-          padding: 8px 5px;
+          & input {
+            width: calc(100% - 12px);
+          }
+          & select {
+            width: 100%;
+          }
+          & input,
+          select {
+            margin-bottom: 10px;
+            font-size: 15px;
+            border: 1px solid rgb(158, 158, 158);
+            border-radius: 5px;
+            padding: 8px 5px;
 
-          &:focus {
-            outline: none;
+            &:focus {
+              outline: none;
+            }
           }
         }
       }
@@ -222,6 +238,11 @@
       & .footer {
         width: 75%;
         margin-top: 5px;
+        @media(max-width:992px){
+          padding-bottom: 20px;
+          width: 80%;
+        }
+
         & button.cadastrar {
           width: 100%;
           border: none;
@@ -298,4 +319,8 @@
       width: 100%;
     }
   }
+}
+
+.no-bg {
+  background-color: transparent !important;
 }
