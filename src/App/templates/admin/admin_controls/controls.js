@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import './controls.scss'
 class admin_controls extends Component {
+    showFormCadastroCoordenador() {
+        document.getElementsByClassName('form-cadastro-coordenador')[0].classList.remove('hide');
+        document.getElementsByClassName('results')[0].classList.add('hide');
+        document.getElementsByClassName('pagination')[0].classList.add('hide');
+        document.getElementsByClassName('control')[0].classList.add('hide');
+    }
 
-    teste(){
-        alert("a");
+    hideFormCadastroCoordenador() {
+        document.getElementsByClassName('form-cadastro-coordenador')[0].classList.add('hide');
+        document.getElementsByClassName('results')[0].classList.remove('hide');
+        document.getElementsByClassName('pagination')[0].classList.remove('hide');
+        document.getElementsByClassName('control')[0].classList.remove('hide');
     }
 
     render() {
@@ -21,12 +30,38 @@ class admin_controls extends Component {
                                 <option value="">Desativados</option>
                             </select>
                         </div>
-                        <div className="icon fa-plus">
-                            <button>Novo coordernador</button>
+                        <div className="icon fa-plus div-btn-show-form-cadastro-coordenador">
+                            <button onClick={() => this.showFormCadastroCoordenador()}>Novo coordernador</button>
                         </div>
+
+
                     </div>
                     <div className="results">
 
+                    </div>
+                    <div className="hide form form-cadastro-coordenador">
+                        <form>
+                            <div className="header">
+                                <p>Cadastro de coordenador</p>
+                            </div>
+
+                            <div className="body">
+                                <label htmlFor="nome_coordenador">Nome do coordenador</label>
+                                <input id="nome_coordenador" placeholder="Coordenador" />
+                                <label htmlFor="curso_coordenador">Curso do coordernador</label>
+                                <select id="curso_coordenador">
+                                    <option selected value="disabled">Selecione um curso</option>
+                                    
+                                </select>
+                            </div>
+                            <div className="footer">
+                                <button className="cadastrar">Cadastrar</button>
+
+                                <button type="button" className="cancelar" onClick={() => this.hideFormCadastroCoordenador()}>Cancelar</button>
+
+                            </div>
+
+                        </form>
                     </div>
                     <div className="pagination">
                         <div className="total_results">
@@ -46,8 +81,8 @@ class admin_controls extends Component {
                         <div className="icon fa-search">
                             <input placeholder="Pesquise um curso" />
                         </div>
-                        
-                        <div className="icon fa-plus">
+
+                        <div className="icon fa-plus div-btn-show-form-cadastro-curso">
                             <button>Novo curso</button>
                         </div>
                     </div>

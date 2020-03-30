@@ -24,16 +24,14 @@ class admin extends Component {
         document.getElementById("opcoes").classList.toggle("hide");
     }
 
-   
-
-    componentDidMount() {
+    render() {
+        
         window.addEventListener("click", function (event) {
             if (event.target.parentNode.parentNode != this.document.getElementsByClassName("user")[0]) {
                 this.document.getElementById("opcoes").classList.add("hide");
             }
         })
-    }
-    render() {
+
         return (
             <div className="admin">
                 <div className="admin_banner">

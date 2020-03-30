@@ -59,23 +59,25 @@
         padding-left: 35px;
       }
     }
-
-    & button {
-      cursor: pointer;
-      border-radius: 15px;
-      background-color: #28d93f;
-      border: none;
-      font-size: 15px;
-      font-family: "ms-yahei-bold";
-      padding: 8px 35px 8px 20px;
-      color: white;
-      &:focus {
-        outline: none;
-      }
-      @media (max-width: 992px) {
-        width: 100%;
-        padding: 8px 15px;
-        display: flex;
+    & .div-btn-show-form-cadastro-coordenador,
+    .div-btn-show-form-cadastro-curso {
+      & button {
+        cursor: pointer;
+        border-radius: 15px;
+        background-color: #28d93f;
+        border: none;
+        font-size: 15px;
+        font-family: "ms-yahei-bold";
+        padding: 8px 35px 8px 20px;
+        color: white;
+        &:focus {
+          outline: none;
+        }
+        @media (max-width: 992px) {
+          width: 100%;
+          padding: 8px 15px;
+          display: flex;
+        }
       }
     }
 
@@ -105,7 +107,7 @@
         width: 17px;
         height: 17px;
         margin: 10px 0 0 13px;
-        @media (max-width: 992px){
+        @media (max-width: 992px) {
           margin: 20px 0 0 13px;
         }
       }
@@ -120,7 +122,7 @@
         height: 10px;
         margin: 18px 0 0 0px;
         right: 10px;
-        @media (max-width: 992px){
+        @media (max-width: 992px) {
           top: 8px;
           margin: 20px 0 0 13px;
         }
@@ -160,6 +162,100 @@
   }
 
   & .results {
+    height: 100%;
+  }
+
+  & .form {
+    font-family: "ms-yahei";
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    & form {
+      border: 1px none rgb(158, 158, 158);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column;
+      max-width: 350px;
+      width: 100%;
+      padding: 10px 5px 0 5px;
+
+      & .header {
+        width: 100%;
+        & p {
+          text-align: center;
+          font-family: "ms-yahei-bold";
+          margin: 10px 5px;
+          font-size: 25px;
+          color: #717171;
+        }
+      }
+      & .body {
+        width: 75%;
+        & label {
+          font-family: "ms-jhenghei";
+          font-size: 14px;
+        }
+
+        & input {
+          width: calc(100% - 11px);
+        }
+        & select {
+          width: 100%;
+        }
+        & input,
+        select {
+          margin-bottom: 10px;
+          font-size: 15px;
+          border: 1px solid rgb(158, 158, 158);
+          border-radius: 5px;
+          padding: 8px 5px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      & .footer {
+        width: 75%;
+        margin-top: 5px;
+        & button.cadastrar {
+          width: 100%;
+          border: none;
+          color: #fff;
+          background-color: rgb(73, 173, 255);
+          font-size: 17px;
+          font-family: "ms-jhenghei-bold";
+          border-radius: 10px;
+          padding: 10px 0;
+          cursor: pointer;
+          transition: ease-in-out 0.2s;
+          &:hover {
+            background-color: rgb(35, 138, 223);
+          }
+        }
+
+        & button.cancelar {
+          width: 100%;
+          border: none;
+          color: #fff;
+          background-color: rgb(255, 73, 73);
+          font-size: 17px;
+          font-family: "ms-jhenghei-bold";
+          border-radius: 10px;
+          padding: 10px 0;
+          margin-top: 15px;
+          cursor: pointer;
+          transition: ease-in-out 0.2s;
+          &:hover {
+            background-color: rgb(223, 35, 35);
+          }
+        }
+      }
+    }
     height: 100%;
   }
 }
