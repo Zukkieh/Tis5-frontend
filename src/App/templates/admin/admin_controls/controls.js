@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createElement } from 'react';
 import axios from 'axios';
 import './controls.scss'
 class admin_controls extends Component {
@@ -20,6 +20,10 @@ class admin_controls extends Component {
 
         document.getElementsByClassName('results')[0].classList.add('show-loading');
 
+        setTimeout(function(){
+            document.getElementsByClassName('results')[0].classList.remove('show-loading');
+        },1500)
+
 
     }
 
@@ -29,7 +33,7 @@ class admin_controls extends Component {
         let email_coordenador = document.getElementById("email_coordenador").value;
         let password_coordenador = document.getElementById("password_coordenador").value;
 
-        await axios.post("https://tis5-backend.herokuapp.com/coordinator", {person_code: cod_pessoa_coordenador, name: nome_coordenador, email: email_coordenador, password: password_coordenador }, {headers: { Authorization: "Bearer " + localStorage.getItem('token') }}).then(res => {
+        await axios.post("https://tis5-backend.herokuapp.com/coordinator", { person_code: cod_pessoa_coordenador, name: nome_coordenador, email: email_coordenador, password: password_coordenador }, { headers: { Authorization: "Bearer " + localStorage.getItem('token') } }).then(res => {
             console.log(res.data)
             console.log(cod_pessoa_coordenador)
             this.hideFormCadastroCoordenador()
@@ -43,7 +47,20 @@ class admin_controls extends Component {
 
     async showAllCordenadores() {
         await axios.get("https://tis5-backend.herokuapp.com/coordinator", { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } }).then(res => {
-            console.log(res.data)
+
+            let allCoordenadores = res.data;
+            console.log(allCoordenadores)
+            let div_results = document.getElementsByClassName("results_coordenador")[0];
+            for (let i = 0; i < allCoordenadores.length; i++) {
+                let resultItem;
+                if (i % 2 == 0) {
+                    resultItem = `<div class="result_item strip"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
+                } else {
+                    resultItem = `<div class="result_item"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
+                }
+
+                div_results.innerHTML += resultItem
+            }
 
         }).catch(err => {
             console.log(err.response)
@@ -71,8 +88,11 @@ class admin_controls extends Component {
 
 
                     </div>
-                    <div className="results">
-
+                    <div className="results results_coordenador">
+                        <div className="result_item_title">
+                            <div><strong>Nome</strong></div>
+                            <div><strong>Código de pessoa</strong></div>
+                        </div>
                     </div>
 
                     <div className="hide form form-cadastro-coordenador">
@@ -110,7 +130,7 @@ class admin_controls extends Component {
                             <p>Exibindo todos os coordenadores</p>
                         </div>
                         <div className="page_select">
-                            <p> <strong>1</strong> - 2 - 3 - 4 - 5</p>
+                            <p></p>
                         </div>
                         <div className="nothing">
 

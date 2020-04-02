@@ -164,6 +164,43 @@
   & .results {
     height: 100%;
     position: relative;
+    display: flex;
+    flex-flow: column;
+    & .result_item {
+      display: flex;
+      justify-content: space-around;
+      height: 45px;
+      background-color: rgb(247, 247, 247);
+      cursor: pointer;
+      transition: ease-in-out 0.2s;
+      &_title {
+        display: flex;
+        justify-content: space-around;
+        height: 45px;
+        background-color: rgb(255, 255, 255);
+        & > div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
+      }
+      &:hover {
+        background-color: rgb(207, 207, 207);
+      }
+      & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      &.strip {
+        background-color: rgb(238, 238, 238);
+        &:hover {
+          background-color: rgb(226, 226, 226);
+        }
+      }
+    }
   }
 
   & .form {
@@ -171,7 +208,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     & form {
       border: 1px none rgb(158, 158, 158);
       border-radius: 15px;
@@ -198,7 +235,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        @media(max-width:992px){
+        @media (max-width: 992px) {
           flex-flow: column;
         }
         & .column {
@@ -206,7 +243,7 @@
           justify-content: flex-start;
           flex-flow: column;
           width: 44%;
-          @media(max-width:992px){
+          @media (max-width: 992px) {
             width: 100%;
           }
           & label {
@@ -238,7 +275,7 @@
       & .footer {
         width: 75%;
         margin-top: 5px;
-        @media(max-width:992px){
+        @media (max-width: 992px) {
           padding-bottom: 20px;
           width: 80%;
         }

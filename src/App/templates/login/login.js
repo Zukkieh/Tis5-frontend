@@ -38,6 +38,10 @@ class login extends Component {
         localStorage.setItem("type_user", "adm")
         localStorage.setItem("token", res.data.token)
         window.open('/admin', '_self')
+      }else if(res.data.user_type == "Coordenador(a)"){
+        localStorage.setItem("type_user", res.data.user_type)
+        localStorage.setItem("token", res.data.token)
+        window.open('/coordenador/'+res.data.data.id, '_self')
       }
 
       div_login.classList.remove('show-loading')
