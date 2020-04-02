@@ -27,49 +27,25 @@ class Coordenador_controls extends Component {
 
     }
 
-    async cadastrarCoordenador() {
-        let nome_coordenador = document.getElementById("nome_coordenador").value;
-        let cod_pessoa_coordenador = document.getElementById("cod_pessoa_coordenador").value;
-        let email_coordenador = document.getElementById("email_coordenador").value;
-        let password_coordenador = document.getElementById("password_coordenador").value;
-
-        await axios.post("https://tis5-backend.herokuapp.com/coordinator", { person_code: cod_pessoa_coordenador, name: nome_coordenador, email: email_coordenador, password: password_coordenador }, { headers: { Authorization: "Bearer " + localStorage.getItem('token') } }).then(res => {
-            console.log(res.data)
-            console.log(cod_pessoa_coordenador)
-            this.hideFormCadastroCoordenador()
-            this.showAllCordenadores();
-        }).catch(err => {
-            console.log(err.response)
-        })
-
-    }
 
 
-    async showAllCordenadores() {
-        await axios.get("https://tis5-backend.herokuapp.com/coordinator", { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } }).then(res => {
+    async updatePassword(){
+        let id = localStorage.getItem("id")
+        let token = localStorage.getItem("token");
+        let password = document.getElementById("newPass").value
 
-            let allCoordenadores = res.data;
-            console.log(allCoordenadores)
-            let div_results = document.getElementsByClassName("results_coordenador")[0];
-            for (let i = 0; i < allCoordenadores.length; i++) {
-                let resultItem;
-                if (i % 2 == 0) {
-                    resultItem = `<div class="result_item strip"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
-                } else {
-                    resultItem = `<div class="result_item"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
-                }
-
-                div_results.innerHTML += resultItem
+        await axios.patch("https://tis5-backend.herokuapp.com/coordinator/"+id,{password:password}, {headers: { Authorization: "Bearer " +token }}).then(res=>{
+            if(res.data.success){
+                alert("Senha alterada");
+                document.getElementById("newPass").value = ""
             }
-
-        }).catch(err => {
-            console.log(err.response)
+        }).catch(err =>{
+            console.log(err.data)
         })
     }
-
 
     render() {
-        this.showAllCordenadores()
+        
         return (
             <div className="coordenador_controls">
                 
@@ -78,7 +54,7 @@ class Coordenador_controls extends Component {
                 <div>
                     <label htmlFor="newPass">Digite sua nova senha</label>
                     <input type="password" id="newPass" />
-                    <button>Alterar</button>
+                    <button onClick={()=>this.updatePassword()}>Alterar</button>
                 </div>
 
             </div>

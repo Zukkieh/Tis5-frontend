@@ -35,8 +35,8 @@ class Coordenador extends Component {
         let token = localStorage.getItem("token");
 
         axios.get("https://tis5-backend.herokuapp.com/coordinator/"+id, {headers: { Authorization: "Bearer " +token }}).then(res => {
-            console.log(res.data[0])
             document.getElementById("name_coordenador").innerHTML=res.data[0].name
+            localStorage.setItem("id",res.data[0].id)
         }).catch(err => {
             try {
                 alert(err.response.data[0].message)
