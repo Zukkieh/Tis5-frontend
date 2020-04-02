@@ -32,6 +32,11 @@ class admin extends Component {
             }
         })
 
+        if(localStorage.getItem("type_user") != "adm"){
+            alert("Você não tem autorização para acessar essa página")
+            window.history.back()
+        }
+
         return (
             <div className="admin">
                 <div className="admin_banner">
