@@ -24,6 +24,11 @@ class admin extends Component {
         document.getElementById("opcoes").classList.toggle("hide");
     }
 
+    logout(){
+        localStorage.clear();
+        window.open("/login","_self")
+    }
+
     render() {
 
         window.addEventListener("click", function (event) {
@@ -53,7 +58,7 @@ class admin extends Component {
                         <div id="adm-op" >
                             <p>Administrador</p>
                             <div id="opcoes" className="hide">
-                                <div>
+                                <div onClick={()=> this.logout()}>
                                     sair
                                 </div>
                             </div>
