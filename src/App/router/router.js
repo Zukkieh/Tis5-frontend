@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import login from '../templates/login/login';
 import cadastro from '../templates/cadastro/cadastro';
 import admin from '../templates/admin/admin';
+import coodernador from  '../templates/coordenador/coordenador';
 
 class Routes extends Component {
   render() {
@@ -15,6 +16,7 @@ class Routes extends Component {
         <Route exact path="/cadastro" component={cadastro} />
         <Route exact path="/login" component={login} />
         <Route exact path="/admin" component={admin} />
+        <Route exact path="/coordenador/perfil/:id" component={coodernador} />
       </Router>
     );
   }
