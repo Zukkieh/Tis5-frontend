@@ -71,10 +71,12 @@ class admin extends Component {
                         <div className="title">
                             <p>Opções do Administrador</p>
                         </div>
-
+                        {/*
                         <div className="item item-curso" onClick={() => this.clickCursos()}>
                             <p>Gerenciar Cursos</p>
                         </div>
+
+                        */}
 
                         <div className="item item-coordenador active" onClick={() => this.clickCoordenadores()}>
                             <p>Gerenciar Coordenadores</p>

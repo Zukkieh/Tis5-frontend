@@ -31,19 +31,26 @@ class login extends Component {
     //body_req = JSON.stringify(body_req);
 
 
-    
-    await axios.post("https://tis5-backend.herokuapp.com/login", {person_code:person_code,password:password}).then(res => {
-      console.log(res.data.token)
-      localStorage.setItem("type_user","adm")
-      localStorage.setItem("token",res.data.token)
-      window.open('/admin','_self')
+
+    await axios.post("https://tis5-backend.herokuapp.com/login", { person_code: person_code, password: password }).then(res => {
+      console.log(res.data.user_type)
+      if (res.data.user_type == null) {
+        localStorage.setItem("type_user", "adm")
+        localStorage.setItem("token", res.data.token)
+        window.open('/admin', '_self')
+      }
+
       div_login.classList.remove('show-loading')
     }).catch(err => {
-      alert(err.response.data[0].message)
-      console.log(err.response.data[0])
+      try {
+        alert(err.response.data[0].message)
+      } catch (e) {
+        alert(err.message)
+      }
+      console.log(err.response.data)
       div_login.classList.remove('show-loading')
     })
-    
+
   }
 
   render() {
