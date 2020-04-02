@@ -84,7 +84,7 @@ class Coordenador extends Component {
 
                         */}
 
-                        <div className="item item-coordenador active" onClick={() => this.clickCoordenadores()}>
+                        <div className="item item-coordenador active" >
                             <p>Gerenciar Conta</p>
                         </div>
                     </div>
