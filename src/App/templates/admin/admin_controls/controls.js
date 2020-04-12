@@ -1,7 +1,10 @@
-import React, { Component, createElement } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import './controls.scss'
+import { AdminService } from '../../../services/adminService'
+
 class admin_controls extends Component {
+    admService = new AdminService();
     showFormCadastroCoordenador() {
         document.getElementsByClassName('form-cadastro-coordenador')[0].classList.remove('hide');
         document.getElementsByClassName('results')[0].classList.add('hide');
@@ -20,9 +23,9 @@ class admin_controls extends Component {
 
         document.getElementsByClassName('results')[0].classList.add('show-loading');
 
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName('results')[0].classList.remove('show-loading');
-        },1500)
+        }, 1500)
 
 
     }
@@ -44,13 +47,20 @@ class admin_controls extends Component {
 
     }
 
-
     async showAllCordenadores() {
-        await axios.get("https://tis5-backend.herokuapp.com/coordinator", { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } }).then(res => {
+        let div_results = document.getElementsByClassName("results_coordenador")[0];
+        let result_itens = document.getElementsByClassName("result_item");
+        for(let i = 0; i < result_itens.length; i++){
+            result_itens[i].remove()
+        }
+        div_results.classList.add('show-loading')
+       
+        let result = this.admService.listarCoordenadores()
 
+        result.then(res => {
             let allCoordenadores = res.data;
-            console.log(allCoordenadores)
-            let div_results = document.getElementsByClassName("results_coordenador")[0];
+
+
             for (let i = 0; i < allCoordenadores.length; i++) {
                 let resultItem;
                 if (i % 2 == 0) {
@@ -61,15 +71,23 @@ class admin_controls extends Component {
 
                 div_results.innerHTML += resultItem
             }
+            console.clear();
+            console.log("Exibindo todos coordenadores abaixo")
+            console.log(res.data)
+            div_results.classList.remove('show-loading')
+        })
 
-        }).catch(err => {
-            console.log(err.response)
+        result.catch(error => {
+            console.log("Erro ao exibir todos os coordenadores: " + error.response)
         })
     }
 
+    componentDidMount() {
+        this.showAllCordenadores();
+    }
 
     render() {
-        this.showAllCordenadores()
+
         return (
             <div className="admin_controls">
                 <div id="coordenadores">
@@ -112,7 +130,7 @@ class admin_controls extends Component {
                                     <label htmlFor="email_coordenador">Email</label>
                                     <input id="email_coordenador" type="email" placeholder="Emai" />
                                     <label htmlFor="password_coordenador">Senha (123456)</label>
-                                    <input id="password_coordenador" value="123456" placeholder="123456" type="password" />
+                                    <input id="password_coordenador" value="123456" onChange={() => console} placeholder="123456" type="password" />
                                 </div>
                             </div>
                             <div className="footer">

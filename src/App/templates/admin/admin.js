@@ -13,10 +13,12 @@ class admin extends Component {
     }
 
     clickCoordenadores() {
+        /*
         document.getElementById("cursos").classList.add("hide");
         document.getElementById("coordenadores").classList.remove("hide");
         document.getElementsByClassName("item-curso").item(0).classList.remove("active");
         document.getElementsByClassName("item-coordenador").item(0).classList.add("active");
+        */
 
     }
 
@@ -29,8 +31,9 @@ class admin extends Component {
         window.open("/login","_self")
     }
 
-    render() {
 
+
+    render() {
         window.addEventListener("click", function (event) {
             if (event.target.parentNode.parentNode !== this.document.getElementsByClassName("user")[0]) {
                 this.document.getElementById("opcoes").classList.add("hide");

@@ -32,7 +32,7 @@ class login extends Component {
 
 
 
-    await axios.post("https://tis5-backend.herokuapp.com/login", { person_code: person_code, password: password }).then(res => {
+    await axios.post("https://tis5-backend.herokuapp.com/auth", { person_code: person_code, password: password }).then(res => {
       console.log(res.data.user_type)
       if (res.data.user_type == null) {
         localStorage.setItem("type_user", "adm")
