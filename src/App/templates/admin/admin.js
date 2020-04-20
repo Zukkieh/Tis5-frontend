@@ -13,12 +13,12 @@ class admin extends Component {
     }
 
     clickCoordenadores() {
-        /*
+
         document.getElementById("cursos").classList.add("hide");
         document.getElementById("coordenadores").classList.remove("hide");
         document.getElementsByClassName("item-curso").item(0).classList.remove("active");
         document.getElementsByClassName("item-coordenador").item(0).classList.add("active");
-        */
+
 
     }
 
@@ -26,9 +26,9 @@ class admin extends Component {
         document.getElementById("opcoes").classList.toggle("hide");
     }
 
-    logout(){
+    logout() {
         localStorage.clear();
-        window.open("/login","_self")
+        window.open("/login", "_self")
     }
 
 
@@ -40,7 +40,7 @@ class admin extends Component {
             }
         })
 
-        if(localStorage.getItem("type_user") != "adm"){
+        if (localStorage.getItem("type_user") != "adm") {
             alert("Você não tem autorização para acessar essa página")
             window.history.back()
         }
@@ -61,7 +61,7 @@ class admin extends Component {
                         <div id="adm-op" >
                             <p>Administrador</p>
                             <div id="opcoes" className="hide">
-                                <div onClick={()=> this.logout()}>
+                                <div onClick={() => this.logout()}>
                                     sair
                                 </div>
                             </div>
@@ -74,12 +74,10 @@ class admin extends Component {
                         <div className="title">
                             <p>Opções do Administrador</p>
                         </div>
-                        {/*
+
                         <div className="item item-curso" onClick={() => this.clickCursos()}>
                             <p>Gerenciar Cursos</p>
                         </div>
-
-                        */}
 
                         <div className="item item-coordenador active" onClick={() => this.clickCoordenadores()}>
                             <p>Gerenciar Coordenadores</p>
