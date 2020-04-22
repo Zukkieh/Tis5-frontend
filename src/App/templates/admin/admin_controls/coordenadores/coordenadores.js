@@ -9,7 +9,8 @@ class Coordenadores extends Component {
     constructor() {
         super();
         this.state = {
-            coordinators: []
+            coordinators: [],
+            coordinators_edit: []
         }
     }
 
@@ -34,6 +35,8 @@ class Coordenadores extends Component {
 
     }
 
+
+
     async cadastrarCoordenador() {
         document.getElementsByClassName("form-cadastro-coordenador")[0].classList.add("show-loading");
         let nome_coordenador = document.getElementById("nome_coordenador").value;
@@ -56,6 +59,23 @@ class Coordenadores extends Component {
             console.log(error.response)
         })
 
+    }
+
+    editCoordinator(coordenador) {
+        document.getElementsByClassName('results')[0].classList.add('hide');
+        document.getElementsByClassName('pagination')[0].classList.add('hide');
+        document.getElementsByClassName('control')[0].classList.add('hide');
+        document.getElementsByClassName('edit')[0].classList.remove('hide');
+        this.setState({ coordinators_edit: coordenador })
+
+    }
+
+    closeEditingCoordinator() {
+        document.getElementsByClassName('results')[0].classList.remove('hide');
+        document.getElementsByClassName('pagination')[0].classList.remove('hide');
+        document.getElementsByClassName('control')[0].classList.remove('hide');
+        document.getElementsByClassName('edit')[0].classList.add('hide');
+        this.setState({ coordinators_edit: [] })
     }
 
     componentDidMount() {
@@ -84,6 +104,35 @@ class Coordenadores extends Component {
 
 
                     </div>
+                    <div className="hide edit_coordinator edit form">
+
+                        <form>
+                            <div className="header">
+                                <p>Editar Coordenador</p>
+                            </div>
+
+                            <div className="body">
+                                <div className="column">
+                                    <label htmlFor="edit_nome_coordenador">Nome do coordenador</label>
+                                    <input id="edit_nome_coordenador" placeholder="Coordenador" value={this.state.coordinators_edit.name} />
+                                    <label htmlFor="edit_cod_pessoa_coordenador">Código de pessoa</label>
+                                    <input id="edit_cod_pessoa_coordenador" placeholder="Código de pessoa" value={this.state.coordinators_edit.person_code} />
+                                </div>
+                                <div className="column">
+                                    <label htmlFor="edit_email_coordenador">Email</label>
+                                    <input id="edit_email_coordenador" type="email" placeholder="Emai" value={this.state.coordinators_edit.email} />
+                                    <label htmlFor="edit_password_coordenador">Senha</label>
+                                    <input id="edit_password_coordenador" placeholder="Nova Senha" type="password" />
+                                </div>
+                            </div>
+                            <div className="footer">
+                                <button className="cadastrar" type="button">Alterar dados</button>
+                                <button type="button" className="cancelar">Apagar Coordenador</button>
+                                <a onClick={() => this.closeEditingCoordinator()} href="javascript:void(0)">Voltar</a>
+                            </div>
+                        </form>
+
+                    </div>
                     <div className="results results_coordenador">
                         <div className="result_item_title">
                             <div><strong>Nome</strong></div>
@@ -94,7 +143,7 @@ class Coordenadores extends Component {
 
                             this.state.coordinators.map((coordenador) => (
 
-                                <div class="result_item">
+                                <div class="result_item" onClick={() => this.editCoordinator(coordenador)}>
                                     <div>{coordenador.name}</div>
                                     <div>{coordenador.person_code}</div>
                                 </div>
@@ -125,8 +174,9 @@ class Coordenadores extends Component {
                             <div className="footer">
                                 <button className="cadastrar" type="button" onClick={() => this.cadastrarCoordenador()}>Cadastrar</button>
 
-                                <button type="button" className="cancelar" onClick={() => this.hideFormCadastroCoordenador()}>Cancelar</button>
 
+
+                                <a href="javascript:void(0)" onClick={() => this.hideFormCadastroCoordenador()} >Voltar</a>
                             </div>
 
                         </form>
@@ -134,7 +184,7 @@ class Coordenadores extends Component {
 
                     <div className="pagination">
                         <div className="total_results">
-                            <p>Exibindo {/*  <span id="showing_results">0</span> de */} <span id="total_results">0</span> resultados.</p>
+                            <p>Exibindo {/*  <span id="showing_results">0</span> de */} <span id="total_results">{this.state.coordinators.length}</span> coordenadores</p>
                         </div>
                         <div className="page_select">
 
