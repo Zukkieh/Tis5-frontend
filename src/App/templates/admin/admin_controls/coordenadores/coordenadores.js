@@ -4,7 +4,14 @@ import { AdminService } from '../../../../services/adminService'
 class Coordenadores extends Component {
 
     admService = new AdminService();
-    listCoordinators = [];
+
+
+    constructor() {
+        super();
+        this.state = {
+            coordinators: []
+        }
+    }
 
 
 
@@ -24,8 +31,6 @@ class Coordenadores extends Component {
     }
 
     pesquisaCoordenador() {
-
-        this.showAllCordenadores();
 
     }
 
@@ -53,78 +58,17 @@ class Coordenadores extends Component {
 
     }
 
-
-
-
-    showAllCordenadores() {
-        let title_result = `<div class="result_item_title">
-                                <div><strong>Nome</strong></div>
-                                <div><strong>Código de pessoa</strong></div>
-                            </div>`;
-        let div_results = document.getElementsByClassName("results_coordenador")[0];
-
-        if (this.listCoordinators.length == 0) {
-            div_results.classList.add('show-loading')
-            let result = this.admService.listarCoordenadores()
-            result.then(res => {
-                this.listCoordinators = res.data;
-                let allCoordenadores = this.listCoordinators
-                div_results.innerHTML = '';
-                div_results.innerHTML += title_result;
-                for (let i = 0; i < allCoordenadores.length && i < 5; i++) {
-                    let resultItem;
-                    if (i % 2 == 0) {
-                        resultItem = `<div class="result_item strip"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
-                    } else {
-                        resultItem = `<div class="result_item"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
-                    }
-
-                    div_results.innerHTML += resultItem
-                }
-                div_results.classList.remove('show-loading')
-                let showing_results = document.getElementById("showing_results");
-                let total_results = document.getElementById("total_results");
-
-                showing_results.innerText = 5;
-                total_results.innerText = this.listCoordinators.length;
-                console.log(res.data)
-            })
-            result.catch(error => {
-                console.log("Erro ao exibir todos os coordenadores: " + error.response)
-            })
-
-        } else {
-
-            let div_results = document.getElementsByClassName("results_coordenador")[0];
-            let allCoordenadores = this.listCoordinators
-            div_results.innerHTML = '';
-            div_results.innerHTML += title_result;
-            for (let i = 0; i < allCoordenadores.length; i++) {
-                let resultItem;
-                if (i % 2 == 0) {
-                    resultItem = `<div class="result_item strip"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
-                } else {
-                    resultItem = `<div class="result_item"><div>` + allCoordenadores[i].name + `</div><div>` + allCoordenadores[i].person_code + `</div></div>`;
-                }
-
-                div_results.innerHTML += resultItem
-            }
-
-        }
-    }
-
-
     componentDidMount() {
-        this.showAllCordenadores();
-
+        const response = new AdminService().listarCoordenadores();
+        response.then((r => {
+            this.setState({ coordinators: r.data })
+        }))
     }
 
     render() {
-
         return (
-
-            <div className="admin_controls_comp">
-                <div id="coordenadores">
+            <div id="coordenadores" className="admin_controls_comp">
+                <div >
                     <div className="control ">
                         <div className="icon fa-search">
                             <input onKeyDown={() => this.pesquisaCoordenador()} placeholder="Pesquise um coordenador" />
@@ -145,6 +89,17 @@ class Coordenadores extends Component {
                             <div><strong>Nome</strong></div>
                             <div><strong>Código de pessoa</strong></div>
                         </div>
+                        {
+
+
+                            this.state.coordinators.map((coordenador) => (
+
+                                <div class="result_item">
+                                    <div>{coordenador.name}</div>
+                                    <div>{coordenador.person_code}</div>
+                                </div>
+                            ))
+                        }
                     </div>
 
                     <div className="hide form form-cadastro-coordenador">
@@ -179,10 +134,10 @@ class Coordenadores extends Component {
 
                     <div className="pagination">
                         <div className="total_results">
-                            <p>Exibindo <span id="showing_results">0</span> de <span id="total_results">0</span> resultados.</p>
+                            <p>Exibindo {/*  <span id="showing_results">0</span> de */} <span id="total_results">0</span> resultados.</p>
                         </div>
                         <div className="page_select">
-                            <p> <a>1</a> - <a>2</a> - <a>3</a> </p>
+
                         </div>
                         <div className="nothing">
 

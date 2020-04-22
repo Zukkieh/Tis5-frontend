@@ -1,6 +1,7 @@
 body {
     background: transparent linear-gradient(241deg, #e2bee1 0%, #7ea7b4 100%) 0% 0% no-repeat padding-box;
 }
+
 .App {
     min-height: 100vh;
     display: flex;
@@ -24,10 +25,9 @@ body {
 }
 
 .show-loading {
-    
     &:before {
         content: "";
-        background-image: url('./assets/gif/loading.gif');
+        background-image: url("./assets/gif/loading.gif");
         background-repeat: no-repeat;
         background-position: center;
         display: flex;
