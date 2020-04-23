@@ -60,9 +60,11 @@ class admin extends Component {
                         </div>
                         <div id="adm-op" >
                             <p>Administrador</p>
-                            <div id="opcoes" className="hide">
-                                <div onClick={() => this.logout()}>
-                                    sair
+                            <div id="opcoes" className="hide" onClick={() => this.logout()}>
+                                <div >
+                                    <span>
+                                        sair
+                                    </span>
                                 </div>
                             </div>
                         </div>

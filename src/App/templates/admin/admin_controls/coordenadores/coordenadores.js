@@ -37,6 +37,14 @@ class Coordenadores extends Component {
 
 
 
+    todosCoordenadores() {
+        const response = new AdminService().listarCoordenadores();
+        response.then((r => {
+            this.setState({ coordinators: r.data })
+            console.clear();
+        }))
+    }
+
     async cadastrarCoordenador() {
         document.getElementsByClassName("form-cadastro-coordenador")[0].classList.add("show-loading");
         let nome_coordenador = document.getElementById("nome_coordenador").value;
@@ -70,6 +78,28 @@ class Coordenadores extends Component {
 
     }
 
+    apagarCoordenador(nome, id) {
+
+        if (window.confirm("Você realmente deseja apagar o coordenador " + nome + " ?")) {
+            document.getElementsByClassName('form')[0].classList.add('show-loading')
+            const response = new AdminService().apagarCoordenador(id);
+            response.then(r => {
+                console.log(r.data)
+                alert("O coordenador " + nome + " foi apagado!")
+                this.todosCoordenadores()
+                this.closeEditingCoordinator()
+                document.getElementsByClassName('form')[0].classList.remove('show-loading')
+            })
+            response.catch(error => {
+                console.log(error.response)
+                document.getElementsByClassName('form')[0].classList.remove('show-loading')
+            })
+        }
+    }
+
+
+
+
     closeEditingCoordinator() {
         document.getElementsByClassName('results')[0].classList.remove('hide');
         document.getElementsByClassName('pagination')[0].classList.remove('hide');
@@ -79,10 +109,8 @@ class Coordenadores extends Component {
     }
 
     componentDidMount() {
-        const response = new AdminService().listarCoordenadores();
-        response.then((r => {
-            this.setState({ coordinators: r.data })
-        }))
+        this.todosCoordenadores();
+
     }
 
     render() {
@@ -127,7 +155,7 @@ class Coordenadores extends Component {
                             </div>
                             <div className="footer">
                                 <button className="cadastrar" type="button">Alterar dados</button>
-                                <button type="button" className="cancelar">Apagar Coordenador</button>
+                                <button type="button" className="cancelar" onClick={() => this.apagarCoordenador(this.state.coordinators_edit.name, this.state.coordinators_edit.user_id)}>Apagar Coordenador</button>
                                 <a onClick={() => this.closeEditingCoordinator()} href="javascript:void(0)">Voltar</a>
                             </div>
                         </form>
@@ -143,7 +171,7 @@ class Coordenadores extends Component {
 
                             this.state.coordinators.map((coordenador) => (
 
-                                <div class="result_item" onClick={() => this.editCoordinator(coordenador)}>
+                                <div className="result_item" onClick={() => this.editCoordinator(coordenador)}>
                                     <div>{coordenador.name}</div>
                                     <div>{coordenador.person_code}</div>
                                 </div>

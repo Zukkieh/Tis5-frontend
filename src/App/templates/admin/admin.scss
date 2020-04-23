@@ -30,12 +30,12 @@
       }
     }
 
-    & #adm-op{
+    & #adm-op {
       position: relative;
-      & .hide{
+      & .hide {
         display: none;
       }
-      & #opcoes{
+      & #opcoes {
         background-color: rgb(240, 240, 240);
         border: 1px solid black;
         border-radius: 15px;
@@ -44,8 +44,11 @@
         position: absolute;
         width: 120%;
         top: 40px;
+        & span {
+          margin: 0;
+          width: 100%;
+        }
       }
-
     }
   }
 

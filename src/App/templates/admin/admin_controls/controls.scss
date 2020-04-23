@@ -295,36 +295,42 @@
           width: 80%;
         }
 
-        & button.cadastrar {
-          width: 100%;
-          border: none;
-          color: #fff;
-          background-color: rgb(73, 173, 255);
+        & button {
           font-size: 17px;
           font-family: "ms-jhenghei-bold";
           border-radius: 10px;
           padding: 10px 0;
+          width: 100%;
+          border: none;
+          color: #fff;
           cursor: pointer;
           transition: ease-in-out 0.2s;
+        }
+
+        & button.cadastrar {
+          background-color: rgb(73, 173, 255);
+
           &:hover {
             background-color: rgb(35, 138, 223);
           }
         }
 
         & button.cancelar {
-          width: 100%;
-          border: none;
-          color: #fff;
           background-color: rgb(255, 73, 73);
-          font-size: 17px;
-          font-family: "ms-jhenghei-bold";
-          border-radius: 10px;
-          padding: 10px 0;
           margin-top: 15px;
-          cursor: pointer;
-          transition: ease-in-out 0.2s;
           &:hover {
             background-color: rgb(223, 35, 35);
+          }
+        }
+
+        & a {
+          text-decoration: none;
+          margin-top: 15px;
+          display: inline-block;
+          transition: ease-in-out 0.2s;
+          color: rgb(1, 82, 255);
+          &:hover {
+            color: blue;
           }
         }
       }
