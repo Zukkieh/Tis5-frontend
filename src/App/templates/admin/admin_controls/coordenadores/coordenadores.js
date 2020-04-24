@@ -9,11 +9,18 @@ class Coordenadores extends Component {
     constructor() {
         super();
         this.state = {
+            updatable: false,
             coordinators: [],
             coordinators_edit: []
         }
     }
 
+
+    onTodoChange(value) {
+        this.setState({
+            name: value
+        });
+    }
 
 
 
@@ -142,13 +149,13 @@ class Coordenadores extends Component {
                             <div className="body">
                                 <div className="column">
                                     <label htmlFor="edit_nome_coordenador">Nome do coordenador</label>
-                                    <input id="edit_nome_coordenador" placeholder="Coordenador" value={this.state.coordinators_edit.name} />
+                                    <input type="text" id="edit_nome_coordenador" placeholder="Coordenador" defaultValue={this.state.coordinators_edit.name} />
                                     <label htmlFor="edit_cod_pessoa_coordenador">Código de pessoa</label>
-                                    <input id="edit_cod_pessoa_coordenador" placeholder="Código de pessoa" value={this.state.coordinators_edit.person_code} />
+                                    <input id="edit_cod_pessoa_coordenador" placeholder="Código de pessoa" defaultValue={this.state.coordinators_edit.person_code} />
                                 </div>
                                 <div className="column">
                                     <label htmlFor="edit_email_coordenador">Email</label>
-                                    <input id="edit_email_coordenador" type="email" placeholder="Emai" value={this.state.coordinators_edit.email} />
+                                    <input id="edit_email_coordenador" type="email" placeholder="Emai" defaultValue={this.state.coordinators_edit.email} />
                                     <label htmlFor="edit_password_coordenador">Senha</label>
                                     <input id="edit_password_coordenador" placeholder="Nova Senha" type="password" />
                                 </div>

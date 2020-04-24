@@ -14,6 +14,10 @@ export class AdminService {
         return axios.get('https://tis5-backend.herokuapp.com/course', { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } })
     }
 
+    async listarCampus() {
+        return axios.get('https://tis5-backend.herokuapp.com/enum/course/campus', { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } })
+    }
+
     async apagarCoordenador(id) {
         return axios.delete("https://tis5-backend.herokuapp.com/user/" + id, { headers: { Authorization: "Bearer " + localStorage.getItem('token') } })
     }
