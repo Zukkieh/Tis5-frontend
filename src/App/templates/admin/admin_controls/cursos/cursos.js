@@ -28,6 +28,10 @@ class Cursos extends Component {
                         </div>
                     </div>
                     <div className="results">
+                        <div className="result_item_title">
+                            <div><strong>Curso</strong></div>
+                            <div><strong>Campus</strong></div>
+                        </div>
                         {
 
 
@@ -35,7 +39,7 @@ class Cursos extends Component {
 
                                 <div class="result_item">
                                     <div>{course.name}</div>
-                                    <div>{course.person_code}</div>
+                                    <div>{course.campus}</div>
                                 </div>
                             ))
                         }
