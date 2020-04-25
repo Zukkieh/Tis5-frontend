@@ -16,14 +16,6 @@ class Coordenadores extends Component {
     }
 
 
-    onTodoChange(value) {
-        this.setState({
-            name: value
-        });
-    }
-
-
-
     showFormCadastroCoordenador() {
         document.getElementsByClassName('form-cadastro-coordenador')[0].classList.remove('hide');
         document.getElementsByClassName('results')[0].classList.add('hide');
@@ -78,22 +70,22 @@ class Coordenadores extends Component {
     alterarCoordenador() {
         document.getElementsByClassName("edit_coordinator")[0].classList.add("show-loading");
         let nome_coordenador = document.getElementById("edit_nome_coordenador").value;
-        let cod_pessoa_coordenador = document.getElementById("edit_cod_pessoa_coordenador").value;
-        let email_coordenador = document.getElementById("edit_email_coordenador").value;
         let password_coordenador = document.getElementById("edit_password_coordenador").value;
-        let id_coordinator = document.getElementById("id_coordinator").value;
+        let type = document.getElementById("edit_type").value;
         let user_id = document.getElementById("id_user").value;
 
-        const alterar = new AdminService().alterarCoordenador(id_coordinator, nome_coordenador, cod_pessoa_coordenador, email_coordenador, password_coordenador);
+        const alterar = new AdminService().alterarCoordenador(user_id, nome_coordenador, password_coordenador, type);
         alterar.then(r => {
             this.todosCoordenadores();
             document.getElementsByClassName("edit_coordinator")[0].classList.remove("show-loading");
             console.log(r)
+            alert("Alterado com sucesso")
         })
 
         alterar.catch(error => {
             console.log(error)
             document.getElementsByClassName("edit_coordinator")[0].classList.remove("show-loading");
+            alert("Erro ao aterar")
         })
 
     }
@@ -105,10 +97,14 @@ class Coordenadores extends Component {
         document.getElementsByClassName('pagination')[0].classList.add('hide');
         document.getElementsByClassName('control')[0].classList.add('hide');
         document.getElementsByClassName('edit')[0].classList.remove('hide');
-        this.setState({ coordinators_edit: coordenador })
+
+        document.getElementById("edit_nome_coordenador").value = coordenador.name;
+        document.getElementById("id_user").value = coordenador.user_id;
     }
 
-    apagarCoordenador(nome, id) {
+    apagarCoordenador() {
+        let nome = document.getElementById("edit_nome_coordenador").value;
+        let id = document.getElementById("id_user").value;
 
         if (window.confirm("Você realmente deseja apagar o coordenador " + nome + " ?")) {
             document.getElementsByClassName('form')[0].classList.add('show-loading')
@@ -202,24 +198,26 @@ class Coordenadores extends Component {
                             <div className="body">
                                 <div className="column">
                                     <label htmlFor="edit_nome_coordenador">Nome do coordenador</label>
-                                    <input type="text" id="edit_nome_coordenador" placeholder="Coordenador" defaultValue={this.state.coordinators_edit.name} />
-                                    <label htmlFor="edit_cod_pessoa_coordenador">Código de pessoa</label>
-                                    <input id="edit_cod_pessoa_coordenador" placeholder="Código de pessoa" defaultValue={this.state.coordinators_edit.person_code} />
+                                    <input type="text" id="edit_nome_coordenador" placeholder="Coordenador" />
                                 </div>
                                 <div className="column">
-                                    <label htmlFor="edit_email_coordenador">Email</label>
-                                    <input id="edit_email_coordenador" type="email" placeholder="Emai" defaultValue={this.state.coordinators_edit.email} />
                                     <label htmlFor="edit_password_coordenador">Senha</label>
                                     <input id="edit_password_coordenador" placeholder="Nova Senha" type="password" />
                                 </div>
+                                <div className="column">
+                                    <label htmlFor="edit_type">Tipo</label>
+                                    <select id="edit_type">
+                                        <option>Coordenador(a)</option>
+                                        <option>Aluno(a)</option>
+                                    </select>
+                                </div>
 
-                                <input type="hidden" id="id_coordinator" defaultValue={this.state.coordinators_edit.id} />
-                                <input type="hidden" id="id_user" defaultValue={this.state.coordinators_edit.user_id} />
+                                <input type="hidden" id="id_user" />
 
                             </div>
                             <div className="footer">
                                 <button className="cadastrar" type="button" onClick={() => this.alterarCoordenador()}>Alterar dados</button>
-                                <button type="button" className="cancelar" onClick={() => this.apagarCoordenador(this.state.coordinators_edit.name, this.state.coordinators_edit.user_id)}>Apagar Coordenador</button>
+                                <button type="button" className="cancelar" onClick={() => this.apagarCoordenador()}>Apagar Coordenador</button>
                                 <a onClick={() => this.closeEditingCoordinator()} href="javascript:void(0)">Voltar</a>
                             </div>
                         </form>

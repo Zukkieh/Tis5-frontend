@@ -22,6 +22,13 @@ class Cursos extends Component {
 
     }
 
+    todosCursos() {
+        const response = new AdminService().listarCursos();
+        response.then((r) => {
+            this.setState({ courses: r.data })
+        })
+    }
+
 
     showFormCadastroCurso() {
         document.getElementsByClassName('form-cadastro-curso')[0].classList.remove('hide');
@@ -69,6 +76,11 @@ class Cursos extends Component {
         document.getElementsByClassName('control')[1].classList.add('hide');
         document.getElementsByClassName('edit')[1].classList.remove('hide');
         this.setState({ course_edit: course })
+
+        document.getElementById("edit_nome_curso").value = course.name;
+        document.getElementById("edit_campus").value = course.campus;
+        document.getElementById("edit_coordenador_curso").value = course.coordinator_id;
+        document.getElementById("id_course").value = course.id
     }
 
     closeEditCourse() {
@@ -78,11 +90,45 @@ class Cursos extends Component {
         document.getElementsByClassName('edit')[1].classList.add('hide');
     }
 
-    componentDidMount() {
-        const response = new AdminService().listarCursos();
-        response.then((r) => {
-            this.setState({ courses: r.data })
+
+    cadastrarCurso() {
+        document.getElementsByClassName("form-cadastro-curso")[0].classList.add("show-loading")
+        let nome = document.getElementById("nome_curso").value;
+        let campus = document.getElementById("campus").value;
+        let id_coordenador = document.getElementById("coordenador_curso").value;
+        const response = new AdminService().cadastrarCurso(nome, campus, id_coordenador + "");
+        response.then(r => {
+            this.todosCursos();
+            this.hideFormCadastroCurso();
+            document.getElementsByClassName("form-cadastro-curso")[0].classList.remove("show-loading")
         })
+        response.catch(error => {
+            alert("Erro ao cadastrar curso: " + error.response.data.message)
+            document.getElementsByClassName("form-cadastro-curso")[0].classList.remove("show-loading")
+            console.log(error.response);
+        })
+    }
+
+    atualizarCurso() {
+        document.getElementsByClassName("edit_course")[0].classList.add("show-loading")
+        let nome = document.getElementById("edit_nome_curso").value;
+        let campus = document.getElementById("edit_campus").value;
+        let id_coordenador = document.getElementById("edit_coordenador_curso").value;
+        const response = new AdminService().cadastrarCurso(nome, campus, id_coordenador + "");
+        response.then(r => {
+            this.todosCursos();
+            this.hideFormCadastroCurso();
+            document.getElementsByClassName("edit_course")[0].classList.remove("show-loading")
+        })
+        response.catch(error => {
+            alert("Erro ao cadastrar curso: " + error.response.data.message)
+            document.getElementsByClassName("edit_course")[0].classList.remove("show-loading")
+            console.log(error.response);
+        })
+    }
+
+    componentDidMount() {
+        this.todosCursos();
 
         this.getCoordenadores()
     }
@@ -174,17 +220,16 @@ class Cursos extends Component {
                             <div className="body">
                                 <div className="column">
                                     <label htmlFor="edit_nome_curso">Nome do Curso</label>
-                                    <input id="edit_nome_curso" placeholder="Curso" defaultValue={this.state.course_edit.name} />
+                                    <input id="edit_nome_curso" placeholder="Curso" />
                                 </div>
                                 <div className="column">
                                     <label htmlFor="edit_campus">Campus</label>
                                     <select id="edit_campus">
-                                        <option>{this.state.course_edit.campus}</option>
                                         {
                                             this.state.campus.map((campus) => {
-                                                if (campus.name != this.state.course_edit.campus) {
-                                                    return campus.name;
-                                                }
+
+                                                return <option>{campus}</option>;
+
                                             })
                                         }
                                     </select>
@@ -195,17 +240,18 @@ class Cursos extends Component {
                                         <option value={this.state.course_edit.coordinator_id}>{this.getNameCoordenator(this.state.course_edit.coordinator_id)}</option>
                                         {
                                             this.state.coordenadores.map((coordenador) => {
-                                                if (coordenador.id != this.state.course_edit.coordinator_id) {
-                                                    return <option value={coordenador.id} >{coordenador.name}</option>
-                                                }
+
+                                                return <option value={coordenador.id} >{coordenador.name}</option>
+
                                             })
                                         }
                                     </select>
+                                    <input type="hidden" id="id_course" />
                                 </div>
                             </div>
                             <div className="footer">
-                                <button className="cadastrar" type="button" onClick={() => this.cadastrarCurso()}>Alterar dados</button>
-                                <button className="cancelar" type="button" onClick={() => this.cadastrarCurso()}>Apagar Curso</button>
+                                <button className="cadastrar" type="button" onClick={() => this.atualizarCurso()}>Alterar dados</button>
+                                <button className="cancelar hide" type="button" onClick={() => this.apagarCurso()}>Apagar Curso</button>
 
                                 <a href="javascript:void(0)" onClick={() => this.closeEditCourse()} >Voltar</a>
                             </div>
