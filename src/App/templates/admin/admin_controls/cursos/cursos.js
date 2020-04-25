@@ -96,7 +96,7 @@ class Cursos extends Component {
         let nome = document.getElementById("nome_curso").value;
         let campus = document.getElementById("campus").value;
         let id_coordenador = document.getElementById("coordenador_curso").value;
-        const response = new AdminService().cadastrarCurso(nome, campus, id_coordenador + "");
+        const response = new AdminService().cadastrarCurso(nome, campus, id_coordenador);
         response.then(r => {
             this.todosCursos();
             this.hideFormCadastroCurso();
@@ -114,14 +114,15 @@ class Cursos extends Component {
         let nome = document.getElementById("edit_nome_curso").value;
         let campus = document.getElementById("edit_campus").value;
         let id_coordenador = document.getElementById("edit_coordenador_curso").value;
-        const response = new AdminService().cadastrarCurso(nome, campus, id_coordenador + "");
+        let id_course = document.getElementById("id_course").value;
+        const response = new AdminService().alterarCurso(id_course, nome, campus, id_coordenador);
         response.then(r => {
             this.todosCursos();
-            this.hideFormCadastroCurso();
+            this.closeEditCourse();
             document.getElementsByClassName("edit_course")[0].classList.remove("show-loading")
         })
         response.catch(error => {
-            alert("Erro ao cadastrar curso: " + error.response.data.message)
+            alert("Erro ao editar curso: " + error.response.data.message)
             document.getElementsByClassName("edit_course")[0].classList.remove("show-loading")
             console.log(error.response);
         })
@@ -190,7 +191,7 @@ class Cursos extends Component {
                                 <div className="column">
                                     <label htmlFor="coordenador_curso">Coordenador</label>
                                     <select id="coordenador_curso">
-                                        <option></option>
+                                        <option value=""></option>
                                         {
                                             this.state.coordenadores.map((coordenador) => (
                                                 <option value={coordenador.id} >{coordenador.name}</option>
@@ -237,7 +238,7 @@ class Cursos extends Component {
                                 <div className="column">
                                     <label htmlFor="edit_coordenador_curso">Coordenador</label>
                                     <select id="edit_coordenador_curso">
-                                        <option value={this.state.course_edit.coordinator_id}>{this.getNameCoordenator(this.state.course_edit.coordinator_id)}</option>
+                                        <option value=""></option>
                                         {
                                             this.state.coordenadores.map((coordenador) => {
 
