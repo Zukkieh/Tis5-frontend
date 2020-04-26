@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export class AdminService {
 
-    async listarCoordenadores() {
-        return axios.get('https://tis5-backend.herokuapp.com/coordinator', { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } })
+    async listarCoordenadores(page, limit) {
+        return axios.get('https://tis5-backend.herokuapp.com/coordinator?page=' + page + '&limit=' + limit, { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } })
     }
 
     async cadastrarCoordenador(nome, cod_pessoa, email, password) {
@@ -20,8 +20,8 @@ export class AdminService {
         return axios.delete("https://tis5-backend.herokuapp.com/user/" + id, { headers: { Authorization: "Bearer " + localStorage.getItem('token') } })
     }
 
-    async listarCursos() {
-        return axios.get('https://tis5-backend.herokuapp.com/course', { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } })
+    async listarCursos(page, limit) {
+        return axios.get('https://tis5-backend.herokuapp.com/course?page=' + page + '&limit=' + limit, { headers: { Authorization: `Bearer ` + localStorage.getItem('token') } })
     }
 
     async listarCampus() {

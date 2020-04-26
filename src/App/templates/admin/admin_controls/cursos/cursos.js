@@ -23,11 +23,27 @@ class Cursos extends Component {
     }
 
     todosCursos() {
-        const response = new AdminService().listarCursos();
+        const response = new AdminService().listarCursos(1, 1);
         response.then((r) => {
-            this.setState({ courses: r.data })
+            this.setState({ courses: r.data.data })
         })
     }
+
+    getCampus() {
+        const response = new AdminService().listarCampus();
+        response.then(r => {
+            this.setState({ campus: r.data });
+        })
+
+    }
+
+    getCoordenadores() {
+        const response = new AdminService().listarCoordenadores(1, 1);
+        response.then(r => {
+            this.setState({ coordenadores: r.data.data });
+        })
+    }
+
 
 
     showFormCadastroCurso() {
@@ -44,20 +60,6 @@ class Cursos extends Component {
         document.getElementsByClassName('control')[1].classList.remove('hide');
     }
 
-    getCampus() {
-        const response = new AdminService().listarCampus();
-        response.then(r => {
-            this.setState({ campus: r.data });
-        })
-
-    }
-
-    getCoordenadores() {
-        const response = new AdminService().listarCoordenadores();
-        response.then(r => {
-            this.setState({ coordenadores: r.data });
-        })
-    }
 
     getNameCoordenator(id) {
         let coordenadores = this.state.coordenadores;

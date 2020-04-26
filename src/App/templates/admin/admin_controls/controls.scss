@@ -170,6 +170,18 @@
     @media (max-width: 992px) {
       flex-flow: column;
     }
+    & .page_select {
+      & > div {
+        display: inline-block;
+      }
+      & .page {
+        text-decoration: none;
+        margin-right: 10px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   & .results {

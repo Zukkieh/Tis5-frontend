@@ -11,7 +11,8 @@ class Coordenadores extends Component {
         this.state = {
             updatable: false,
             coordinators: [],
-            coordinators_edit: []
+            totalCoordinators: 0,
+            paginationPages: [],
         }
     }
 
@@ -37,9 +38,29 @@ class Coordenadores extends Component {
 
 
     todosCoordenadores() {
-        const response = new AdminService().listarCoordenadores();
+        const response = new AdminService().listarCoordenadores(1, 1);
         response.then((r => {
-            this.setState({ coordinators: r.data })
+            let total = r.data.total;
+            let pagination = [];
+            this.setState({ totalCoordinators: total })
+            this.paginationCoordinators(1, 7);
+            for (let i = 1; i <= Math.ceil(total / 7); i++) {
+                pagination.push(i);
+            }
+            this.setState({ paginationPages: pagination })
+        }))
+    }
+
+    paginationCoordinators(page, limit) {
+        try {
+            document.getElementsByClassName('results_coordenador')[0].classList.add('show-loading')
+        } catch (error) {
+
+        }
+        const response = new AdminService().listarCoordenadores(page, limit);
+        response.then((r => {
+            this.setState({ coordinators: r.data.data })
+            document.getElementsByClassName('results_coordenador')[0].classList.remove('show-loading')
         }))
     }
 
@@ -131,12 +152,10 @@ class Coordenadores extends Component {
         document.getElementsByClassName('pagination')[0].classList.remove('hide');
         document.getElementsByClassName('control')[0].classList.remove('hide');
         document.getElementsByClassName('edit')[0].classList.add('hide');
-        this.setState({ coordinators_edit: [] })
     }
 
     componentDidMount() {
         this.todosCoordenadores();
-
     }
 
     render() {
@@ -242,9 +261,19 @@ class Coordenadores extends Component {
                     </div>
                     <div className="pagination">
                         <div className="total_results">
-                            <p>Exibindo {/*  <span id="showing_results">0</span> de */} <span id="total_results">{this.state.coordinators.length}</span> coordenadores</p>
+                            <p>Exibindo <span id="total_results">{this.state.coordinators.length}</span> de {this.state.totalCoordinators} coordenadores</p>
                         </div>
                         <div className="page_select">
+
+                            <a className="page"></a>
+                            {
+                                this.state.paginationPages.map((page) => (
+                                    <div>
+                                        <a href="javascript:void(0)" onClick={() => this.paginationCoordinators(page, 7)} className="page">  {page} </a>
+                                        <a className="separator"></a>
+                                    </div>
+                                ))
+                            }
 
                         </div>
                         <div className="nothing">

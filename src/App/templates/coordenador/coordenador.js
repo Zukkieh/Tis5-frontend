@@ -34,17 +34,17 @@ class Coordenador extends Component {
         let id = this.props.match.params.id;
         let token = localStorage.getItem("token");
 
-        axios.get("https://tis5-backend.herokuapp.com/coordinator/"+id, {headers: { Authorization: "Bearer " +token }}).then(res => {
-            document.getElementById("name_coordenador").innerHTML=res.data[0].name
-            localStorage.setItem("id",res.data[0].id)
+        axios.get("https://tis5-backend.herokuapp.com/coordinator/" + id, { headers: { Authorization: "Bearer " + token } }).then(res => {
+            document.getElementById("name_coordenador").innerHTML = res.data.name
+            localStorage.setItem("id", res.data.id)
+            console.log(res)
         }).catch(err => {
             try {
-                alert(err.response.data[0].message)
+                console.log(err)
             } catch (e) {
-                alert(err.message)
+                console.log(err)
             }
-            console.log(err.response.data)
-           
+
         })
 
 
