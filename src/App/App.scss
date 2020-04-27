@@ -28,6 +28,10 @@ body {
 }
 
 .show-loading {
+    overflow-y: hidden !important;
+    & .result_item {
+        display: none !important;
+    }
     &:before {
         content: "";
         background-image: url("./assets/gif/loading.gif");
@@ -38,5 +42,6 @@ body {
         height: 100%;
         position: absolute;
         background-color: rgba(255, 255, 255, 0.863);
+        z-index: 99999;
     }
 }

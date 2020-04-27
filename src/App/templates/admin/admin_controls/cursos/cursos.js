@@ -8,6 +8,8 @@ class Cursos extends Component {
             campus: [],
             coordenadores: [],
             course_edit: [],
+            paginationPages: []
+
         }
     }
 
@@ -25,7 +27,8 @@ class Cursos extends Component {
     todosCursos() {
         const response = new AdminService().listarCursos(1, 1);
         response.then((r) => {
-            this.setState({ courses: r.data.data })
+            this.paginationCurso(1, 5);
+
         })
     }
 
@@ -40,8 +43,43 @@ class Cursos extends Component {
     getCoordenadores() {
         const response = new AdminService().listarCoordenadores(1, 1);
         response.then(r => {
-            this.setState({ coordenadores: r.data.data });
+            this.paginationCoordinators(1, r.data.total)
         })
+    }
+
+    paginationCurso(page, limit) {
+
+        let response;
+        if (limit == null) {
+            limit = document.getElementById('pagination_per_view_course').value;
+        }
+
+        response = new AdminService().listarCursos(page, limit);
+
+        response.then((r) => {
+            this.setState({ courses: r.data.data })
+            let total = r.data.total;
+
+            let pagination = [];
+            for (let i = 1; i <= Math.ceil(total / limit); i++) {
+                pagination.push(i);
+            }
+            this.setState({ paginationPages: pagination })
+
+            let pagesSize = document.getElementsByClassName("pageCourse").length;
+            for (let i = 0; i < pagesSize; i++) {
+                document.getElementsByClassName("pageCourse")[i].classList.remove("select")
+            }
+            document.getElementsByClassName(page + "Course")[0].classList.add('select')
+        })
+
+    }
+
+    paginationCoordinators(page, limit) {
+        const response = new AdminService().listarCoordenadores(page, limit);
+        response.then((r => {
+            this.setState({ coordenadores: r.data.data });
+        }))
     }
 
 
@@ -61,7 +99,7 @@ class Cursos extends Component {
     }
 
 
-    getNameCoordenator(id) {
+    getNameCoordenador(id) {
         let coordenadores = this.state.coordenadores;
         for (let i = 0; i < coordenadores.length; i++) {
             if (coordenadores[i].id == id) {
@@ -81,7 +119,7 @@ class Cursos extends Component {
 
         document.getElementById("edit_nome_curso").value = course.name;
         document.getElementById("edit_campus").value = course.campus;
-        document.getElementById("edit_coordenador_curso").value = course.coordinator_id;
+        //document.getElementById("edit_coordenador_curso").value = course.coordinator_id;
         document.getElementById("id_course").value = course.id
     }
 
@@ -121,6 +159,8 @@ class Cursos extends Component {
         response.then(r => {
             this.todosCursos();
             this.closeEditCourse();
+            alert("Curso alterado com sucesso")
+            this.setState({ course_edit: [] })
             document.getElementsByClassName("edit_course")[0].classList.remove("show-loading")
         })
         response.catch(error => {
@@ -161,7 +201,7 @@ class Cursos extends Component {
                                 <div className="result_item" onClick={() => this.showEditCourse(course)}>
                                     <div>{course.name}</div>
                                     <div>{course.campus}</div>
-                                    <div>{course.coordinator_id != "" ? this.getNameCoordenator(course.coordinator_id) : "-"}</div>
+                                    <div>{course.coordinator_id != "" ? this.getNameCoordenador(course.coordinator_id) : "-"}</div>
                                 </div>
                             ))
                         }
@@ -193,11 +233,12 @@ class Cursos extends Component {
                                 <div className="column">
                                     <label htmlFor="coordenador_curso">Coordenador</label>
                                     <select id="coordenador_curso">
-                                        <option value=""></option>
+                                        <option value="">*Sem Coordenador*</option>
                                         {
-                                            this.state.coordenadores.map((coordenador) => (
-                                                <option value={coordenador.id} >{coordenador.name}</option>
-                                            ))
+                                            this.state.coordenadores.map((coordenador) => {
+                                                if (coordenador.course_id == null)
+                                                    return <option value={coordenador.id} >{coordenador.name}</option>
+                                            })
                                         }
                                     </select>
                                 </div>
@@ -240,14 +281,18 @@ class Cursos extends Component {
                                 <div className="column">
                                     <label htmlFor="edit_coordenador_curso">Coordenador</label>
                                     <select id="edit_coordenador_curso">
-                                        <option value=""></option>
+                                        {
+                                            <option value="">{this.getNameCoordenador(this.state.course_edit.coordinator_id) + " (Atual)"}</option>
+                                        }
+
                                         {
                                             this.state.coordenadores.map((coordenador) => {
-
-                                                return <option value={coordenador.id} >{coordenador.name}</option>
+                                                if (coordenador.course_id == null)
+                                                    return <option value={coordenador.id} >{coordenador.name}</option>
 
                                             })
                                         }
+
                                     </select>
                                     <input type="hidden" id="id_course" />
                                 </div>
@@ -264,9 +309,26 @@ class Cursos extends Component {
 
                     <div className="pagination">
                         <div className="total_results">
-                            <p>Exibindo {this.state.courses.length} resultados</p>
+                            <p>Exibindo </p>
+                            <select onChange={() => this.paginationCurso(1)} id="pagination_per_view_course">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                            <p>por página</p>
                         </div>
                         <div className="page_select">
+                            <span>Páginas:</span>
+                            <a className="pageCourse"></a>
+                            {
+                                this.state.paginationPages.map((page) => (
+                                    <div>
+                                        <a href="javascript:void(0)" onClick={() => this.paginationCurso(page)} className={page + "Course" + " pageCourse"} >  {page} </a>
+                                        <a className="separator"></a>
+                                    </div>
+                                ))
+                            }
 
                         </div>
                         <div className="nothing">

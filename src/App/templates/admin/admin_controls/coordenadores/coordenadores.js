@@ -41,13 +41,9 @@ class Coordenadores extends Component {
         const response = new AdminService().listarCoordenadores(1, 1);
         response.then((r => {
             let total = r.data.total;
-            let pagination = [];
             this.setState({ totalCoordinators: total })
-            this.paginationCoordinators(1, 7);
-            for (let i = 1; i <= Math.ceil(total / 7); i++) {
-                pagination.push(i);
-            }
-            this.setState({ paginationPages: pagination })
+            this.paginationCoordinators(1, 5);
+
         }))
     }
 
@@ -57,12 +53,36 @@ class Coordenadores extends Component {
         } catch (error) {
 
         }
-        const response = new AdminService().listarCoordenadores(page, limit);
+
+        let response;
+
+
+        if (limit == null) {
+            limit = document.getElementById('pagination_per_view').value;
+        }
+        response = new AdminService().listarCoordenadores(page, limit);
+
+
         response.then((r => {
             this.setState({ coordinators: r.data.data })
+            let total = r.data.total;
+
+            let pagination = [];
+            for (let i = 1; i <= Math.ceil(total / limit); i++) {
+                pagination.push(i);
+            }
+            this.setState({ paginationPages: pagination })
+
+            let pagesSize = document.getElementsByClassName("page").length;
+            for (let i = 0; i < pagesSize; i++) {
+                document.getElementsByClassName("page")[i].classList.remove("select")
+            }
+            document.getElementsByClassName(page)[0].classList.add('select')
             document.getElementsByClassName('results_coordenador')[0].classList.remove('show-loading')
         }))
     }
+
+
 
     cadastrarCoordenador() {
         document.getElementsByClassName("form-cadastro-coordenador")[0].classList.add("show-loading");
@@ -261,15 +281,22 @@ class Coordenadores extends Component {
                     </div>
                     <div className="pagination">
                         <div className="total_results">
-                            <p>Exibindo <span id="total_results">{this.state.coordinators.length}</span> de {this.state.totalCoordinators} coordenadores</p>
+                            <p>Exibindo </p>
+                            <select onChange={() => this.paginationCoordinators(1)} id="pagination_per_view">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                            <p>por página</p>
                         </div>
                         <div className="page_select">
-
+                            <span>Páginas:</span>
                             <a className="page"></a>
                             {
                                 this.state.paginationPages.map((page) => (
                                     <div>
-                                        <a href="javascript:void(0)" onClick={() => this.paginationCoordinators(page, 7)} className="page">  {page} </a>
+                                        <a href="javascript:void(0)" onClick={() => this.paginationCoordinators(page)} className={page + " page"} >  {page} </a>
                                         <a className="separator"></a>
                                     </div>
                                 ))
