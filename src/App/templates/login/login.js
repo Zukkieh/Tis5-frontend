@@ -38,10 +38,15 @@ class login extends Component {
         localStorage.setItem("type_user", "adm")
         localStorage.setItem("token", res.data.token)
         window.open('/admin', '_self')
-      }else if(res.data.user_type == "Coordenador(a)"){
+      } else if (res.data.user_type == "Coordenador(a)") {
         localStorage.setItem("type_user", res.data.user_type)
         localStorage.setItem("token", res.data.token)
-        window.open('/coordenador/perfil/'+res.data.data.id, '_self')
+        localStorage.setItem("course_id", res.data.data.course.id)
+        localStorage.setItem("id", res.data.data.id)
+        localStorage.setItem("user_id", res.data.data.user_id)
+        localStorage.setItem("name", res.data.data.name)
+        console.log(res.data);
+        window.open('/coordenador/ ', '_self')
       }
 
       div_login.classList.remove('show-loading')

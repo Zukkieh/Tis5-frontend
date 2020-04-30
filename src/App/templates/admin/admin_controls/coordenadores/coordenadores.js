@@ -62,7 +62,6 @@ class Coordenadores extends Component {
         }
         response = new AdminService().listarCoordenadores(page, limit);
 
-
         response.then((r => {
             this.setState({ coordinators: r.data.data })
             let total = r.data.total;
