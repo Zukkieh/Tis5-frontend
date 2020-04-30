@@ -18,7 +18,7 @@ class Disciplinas extends Component {
 
         response.then(res => {
             console.log(res.data)
-            this.paginacaoDisciplina(1, 5);
+            this.paginacaoDisciplina(1);
         })
 
         response.catch(error => {
@@ -55,7 +55,7 @@ class Disciplinas extends Component {
             }
             document.getElementsByClassName(page)[0].classList.add("select")
 
-            console.log(r.data.data)
+
 
 
             document.getElementsByClassName("results_disciplinas")[0].classList.remove("show-loading")
@@ -94,6 +94,30 @@ class Disciplinas extends Component {
 
     }
 
+    editarDisciplina() {
+        let name = document.getElementById("edit_name").value
+        let turno = document.getElementById("edit_turno").value
+        let active = document.getElementById("active").value
+        let id = document.getElementById("disciplina_id").value
+
+        document.getElementsByClassName("form-edit-disciplina")[0].classList.add("show-loading");
+
+        const response = new CoordenadorService().alterarDisciplina(id, name, turno, active);
+
+        response.then(res => {
+            alert("Disciplina alterada")
+            document.getElementsByClassName("form-edit-disciplina")[0].classList.remove("show-loading");
+            this.listarDisciplinas();
+            this.hideEditDisciplina();
+        })
+
+        response.catch(error => {
+            alert("Não foi possível alterar essa disciplina")
+            console.log(error.response)
+        })
+
+    }
+
     showCadastroDisciplina() {
         document.getElementsByClassName("control")[0].classList.add("hide");
         document.getElementsByClassName("results_disciplinas")[0].classList.add("hide");
@@ -106,6 +130,34 @@ class Disciplinas extends Component {
         document.getElementsByClassName("results_disciplinas")[0].classList.remove("hide");
         document.getElementsByClassName("pagination")[0].classList.remove("hide")
         document.getElementsByClassName("form-cadastro-disciplina")[0].classList.add("hide");
+    }
+
+    showEditDisciplina(disciplina) {
+        document.getElementsByClassName("control")[0].classList.add("hide");
+        document.getElementsByClassName("results_disciplinas")[0].classList.add("hide");
+        document.getElementsByClassName("pagination")[0].classList.add("hide")
+        document.getElementsByClassName("form-edit-disciplina")[0].classList.remove("hide");
+
+        console.log(disciplina)
+
+        document.getElementById("edit_name").value = disciplina.name;
+        document.getElementById("edit_turno").value = disciplina.shift;
+        document.getElementById("active").value = disciplina.active;
+        document.getElementById("disciplina_id").value = disciplina.id;
+
+    }
+    hideEditDisciplina() {
+        document.getElementsByClassName("control")[0].classList.remove("hide");
+        document.getElementsByClassName("results_disciplinas")[0].classList.remove("hide");
+        document.getElementsByClassName("pagination")[0].classList.remove("hide")
+        document.getElementsByClassName("form-edit-disciplina")[0].classList.add("hide");
+
+
+        document.getElementById("edit_name").value = ""
+        document.getElementById("edit_turno").value = ""
+        document.getElementById("active").value = ""
+        document.getElementById("disciplina_id").value = ""
+
     }
 
     componentDidMount() {
@@ -130,11 +182,47 @@ class Disciplinas extends Component {
                             <div><strong>Turno</strong></div>
                         </div>
                         {this.state.Disciplinas.map((disciplina) => (
-                            <div className="result_item">
+                            <div className="result_item" onClick={() => this.showEditDisciplina(disciplina)}>
                                 <div>{disciplina.name}</div>
                                 <div>{disciplina.shift}</div>
                             </div>
                         ))}
+                    </div>
+                    <div className="hide form form-edit-disciplina">
+                        <form>
+                            <div className="header">
+                                <p>Alterar Disciplina</p>
+                            </div>
+                            <div className="body">
+                                <div className="column">
+                                    <label htmlFor="edit_name">Disciplina</label>
+                                    <input id="edit_name" placeholder="Nome da disciplina" />
+                                </div>
+                                <div className="column">
+                                    <label htmlFor="edit_turno">Turno</label>
+                                    <select id="edit_turno">
+                                        <option>Manhã</option>
+                                        <option>Tarde</option>
+                                        <option>Noite</option>
+                                    </select>
+                                </div>
+
+                                <div className="column">
+                                    <label htmlFor="active">Situação</label>
+                                    <select id="active">
+                                        <option value="true">Ativa</option>
+                                        <option value="false">Desativada</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="disciplina_id" />
+
+                            </div>
+                            <div className="footer">
+                                <button className="cadastrar" type="button" onClick={() => this.editarDisciplina()}>Alterar dados</button>
+
+                                <a href="javascript:void(0)" onClick={() => this.hideEditDisciplina()} >Voltar</a>
+                            </div>
+                        </form>
                     </div>
                     <div className="hide form form-cadastro-disciplina">
                         <form>
