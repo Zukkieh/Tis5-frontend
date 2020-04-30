@@ -48,7 +48,7 @@ class Cursos extends Component {
     }
 
     paginationCurso(page, limit) {
-
+        document.getElementsByClassName("results_course")[0].classList.add("show-loading")
         let response;
         if (limit == null) {
             limit = document.getElementById('pagination_per_view_course').value;
@@ -71,6 +71,12 @@ class Cursos extends Component {
                 document.getElementsByClassName("pageCourse")[i].classList.remove("select")
             }
             document.getElementsByClassName(page + "Course")[0].classList.add('select')
+            document.getElementsByClassName("results_course")[0].classList.remove("show-loading")
+        })
+
+        response.catch(error => {
+            alert("Erro ou exibir cursos")
+            document.getElementsByClassName("results_course")[0].classList.replace("show-loading")
         })
 
     }
@@ -189,7 +195,7 @@ class Cursos extends Component {
                             <button onClick={() => this.novoCurso()}>Novo curso</button>
                         </div>
                     </div>
-                    <div className="results">
+                    <div className="results results_course">
                         <div className="result_item_title">
                             <div><strong>Curso</strong></div>
                             <div><strong>Campus</strong></div>

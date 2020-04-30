@@ -37,6 +37,7 @@ class Coordenador extends Component {
         axios.get("https://tis5-backend.herokuapp.com/coordinator/" + id, { headers: { Authorization: "Bearer " + token } }).then(res => {
             document.getElementById("name_coordenador").innerHTML = res.data.name
             localStorage.setItem("id", res.data.id)
+            localStorage.setItem("user_id", res.data.user_id)
             console.log(res)
         }).catch(err => {
             try {
@@ -77,13 +78,9 @@ class Coordenador extends Component {
                         <div className="title">
                             <p>Opções do Coordenador</p>
                         </div>
-                        {/*
-                        <div className="item item-curso" onClick={() => this.clickCursos()}>
-                            <p>Gerenciar Cursos</p>
+                        <div className="item item-coordenador" >
+                            <p>Gerenciar Disciplinas</p>
                         </div>
-
-                        */}
-
                         <div className="item item-coordenador active" >
                             <p>Gerenciar Conta</p>
                         </div>

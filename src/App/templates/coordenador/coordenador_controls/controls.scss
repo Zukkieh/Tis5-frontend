@@ -1,22 +1,29 @@
-.coordenador_controls{
+.Coordenador_conta {
   display: flex;
   height: 100%;
   width: 100%;
   justify-content: center;
   flex-flow: column;
   align-items: center;
-  & div{
+  & > div {
     display: flex;
     flex-flow: column;
-
-    & button{
+    & > label {
+      margin-top: 10px;
+    }
+    & > button {
       margin-top: 20px;
       border: none;
-      background-color: rgb(9, 255, 111);
+      background-color: rgb(55, 255, 98);
       color: white;
       font-size: 17px;
-      border-radius: 10px;
+      border-radius: 15px;
+      padding: 7px 0;
       cursor: pointer;
+      transition: 0.2s;
+      &:hover {
+        background-color: rgb(21, 255, 0);
+      }
     }
   }
 }
