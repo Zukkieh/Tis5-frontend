@@ -8,6 +8,7 @@ class Disciplinas extends Component {
             course_id: localStorage.getItem("course_id"),
             Disciplinas: [],
             paginationPages: [],
+            Monitores: []
         }
         console.clear()
 
@@ -28,6 +29,8 @@ class Disciplinas extends Component {
 
             console.log(error.response)
         })
+
+        document.getElementById("course_name").innerHTML = localStorage.getItem("course")
     }
 
     paginacaoDisciplina(page, limit) {
@@ -165,6 +168,32 @@ class Disciplinas extends Component {
 
     }
 
+    showMonitores(){
+        document.getElementsByClassName("form-edit-disciplina")[0].classList.add("hide")
+        document.getElementsByClassName("div_monitores")[0].classList.remove("hide")
+        let nameDisc = document.getElementById("edit_name").value;
+        document.getElementById("disciplina_monitor").innerHTML = nameDisc;
+        this.listarMonitores();
+    }
+
+    hideMonitores(){
+        document.getElementsByClassName("form-edit-disciplina")[0].classList.remove("hide")
+        document.getElementsByClassName("div_monitores")[0].classList.add("hide")
+    }
+
+    listarMonitores(){
+        let disciplina_id = document.getElementById("disciplina_id").value;
+        let response = new CoordenadorService().listarMonitores(disciplina_id);
+
+        response.then(res =>{
+            this.setState({Monitores:res.data.data})
+            console.log(res.data.data)
+        })
+
+
+
+    }
+
     componentDidMount() {
         this.listarDisciplinas();
     }
@@ -174,15 +203,9 @@ class Disciplinas extends Component {
             <div id="view_disciplinas" className="admin_controls_comp">
                 <div>
                     <div className="control ">
-                        {
-                            /*
-                        <div className="icon fa-search">
-                            <input placeholder="Pesquise uma disciplina" />
-                        </div>
-                        */
-                        }
+
                         <div>
-                            <p>Listando disciplinas</p>
+                            <p>Listando disciplinas de <strong><span id="course_name"></span></strong></p>
                         </div>
                         <div className="icon fa-plus div-btn-show-form-cadastro-coordenador">
                             <button onClick={() => this.showCadastroDisciplina()}>Nova disciplina</button>
@@ -231,10 +254,39 @@ class Disciplinas extends Component {
                             </div>
                             <div className="footer">
                                 <button className="cadastrar" type="button" onClick={() => this.editarDisciplina()}>Alterar dados</button>
-                                <button className="monitores" type="button">Gerenciar monitores</button>
+                                <button className="monitores" type="button" onClick={() => this.showMonitores()} >Gerenciar monitores</button>
                                 <a href="javascript:void(0)" onClick={() => this.hideEditDisciplina()} >Voltar</a>
                             </div>
                         </form>
+                    </div>
+                    <div className="hide div_monitores">
+                        <div className="control_monitor">
+                            <div>
+                                <a href="javascript:void(0)" onClick={() => this.hideMonitores()}>Voltar</a>
+                            </div>
+                            <div>
+                                <p>Listando os monitores de  <strong><span id="disciplina_monitor"></span></strong></p>
+                            </div>
+                            <div className="icon fa-plus div-btn-show-form-cadastro-coordenador">
+                                <button >Novo monitor</button>
+                            </div>
+                        </div>
+                        <div className="results results_monitores">
+                            <div className="result_item_title">
+                                <div><strong>Monitor</strong></div>
+                                <div><strong>Cód. pessoa</strong></div>
+                            </div>
+                            {
+                                
+                            this.state.Monitores.map((monitor) => (
+                                <div className="result_item">
+                                    <div>{monitor.student.user.name}</div>
+                                    <div>{monitor.student.user.person_code}</div>
+                                </div>
+                            ))
+                            
+                            }
+                        </div>
                     </div>
                     <div className="hide form form-cadastro-disciplina">
                         <form>

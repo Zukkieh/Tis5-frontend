@@ -71,11 +71,9 @@ class Coordenador extends Component {
         this.setState({ name: name })
 
 
-
         if (!this.state.temCurso) {
             document.getElementsByClassName("item-coordenador-conta")[0].classList.add("active")
             document.getElementsByClassName("item-coordenador-disciplina")[0].remove();
-            document.getElementsByClassName("item-coordenador-monitor")[0].remove();
             document.getElementById("view_disciplinas").classList.add("hide")
             document.getElementById("view_conta").classList.remove("hide")
         }
