@@ -64,6 +64,9 @@ class Cursos extends Component {
             for (let i = 1; i <= Math.ceil(total / limit); i++) {
                 pagination.push(i);
             }
+            if (pagination.length == 0) {
+                pagination.push(1);
+            }
             this.setState({ paginationPages: pagination })
 
             let pagesSize = document.getElementsByClassName("pageCourse").length;
@@ -187,10 +190,16 @@ class Cursos extends Component {
             <div id="cursos" className="admin_controls_comp hide">
                 <div>
                     <div className="control">
+                        {
+                            /*
                         <div className="icon fa-search">
                             <input placeholder="Pesquise um curso" />
                         </div>
-
+                        */
+                        }
+                        <div>
+                            <p>Listando cursos</p>
+                        </div>
                         <div className="icon fa-plus div-btn-show-form-cadastro-curso">
                             <button onClick={() => this.novoCurso()}>Novo curso</button>
                         </div>

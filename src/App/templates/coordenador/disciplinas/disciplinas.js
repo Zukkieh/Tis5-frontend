@@ -22,7 +22,10 @@ class Disciplinas extends Component {
         })
 
         response.catch(error => {
-            alert("Erro ao listar disciplinas")
+            if (localStorage.getItem("course_id" != null)) {
+                alert("Erro ao listar disciplinas")
+            }
+
             console.log(error.response)
         })
     }
@@ -48,17 +51,19 @@ class Disciplinas extends Component {
             for (let i = 1; i <= Math.ceil(total / limit); i++) {
                 pagination.push(i);
             }
+            if (pagination.length == 0) {
+                pagination.push(1);
+            }
             this.setState({ paginationPages: pagination })
             let pagesSize = document.getElementsByClassName("page").length;
             for (let i = 0; i < pagesSize; i++) {
                 document.getElementsByClassName("page")[i].classList.remove("select")
             }
+
             document.getElementsByClassName(page)[0].classList.add("select")
-
-
-
-
             document.getElementsByClassName("results_disciplinas")[0].classList.remove("show-loading")
+
+
 
         }))
 
@@ -87,7 +92,7 @@ class Disciplinas extends Component {
         })
 
         response.catch(error => {
-            alert("Erro ao cadastrar disciplina");
+            alert(error.response.data.errors[0].message);
             console.log(error.response)
             document.getElementsByClassName("form-cadastro-disciplina")[0].classList.remove("show-loading");
         })
@@ -169,8 +174,15 @@ class Disciplinas extends Component {
             <div id="view_disciplinas" className="admin_controls_comp">
                 <div>
                     <div className="control ">
+                        {
+                            /*
                         <div className="icon fa-search">
                             <input placeholder="Pesquise uma disciplina" />
+                        </div>
+                        */
+                        }
+                        <div>
+                            <p>Listando disciplinas</p>
                         </div>
                         <div className="icon fa-plus div-btn-show-form-cadastro-coordenador">
                             <button onClick={() => this.showCadastroDisciplina()}>Nova disciplina</button>

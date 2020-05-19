@@ -70,6 +70,9 @@ class Coordenadores extends Component {
             for (let i = 1; i <= Math.ceil(total / limit); i++) {
                 pagination.push(i);
             }
+            if (pagination.length == 0) {
+                pagination.push(1);
+            }
             this.setState({ paginationPages: pagination })
 
             let pagesSize = document.getElementsByClassName("page").length;
@@ -182,6 +185,8 @@ class Coordenadores extends Component {
             <div id="coordenadores" className="admin_controls_comp">
                 <div >
                     <div className="control ">
+                        {
+                            /*
                         <div className="icon fa-search">
                             <input onKeyDown={() => this.pesquisaCoordenador()} placeholder="Pesquise um coordenador" />
                         </div>
@@ -189,6 +194,11 @@ class Coordenadores extends Component {
                             <select>
                                 <option value="all">Todos coordenadores</option>
                             </select>
+                        </div>
+                        */
+                        }
+                        <div>
+                            <p>Listando coordenadores</p>
                         </div>
                         <div className="icon fa-plus div-btn-show-form-cadastro-coordenador">
                             <button onClick={() => this.showFormCadastroCoordenador()}>Novo coordernador</button>

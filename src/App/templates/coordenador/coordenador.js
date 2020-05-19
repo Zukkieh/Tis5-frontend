@@ -10,6 +10,8 @@ class Coordenador extends Component {
         super();
         this.state = {
             name: "",
+            title: "",
+            temCurso: false,
         }
     }
 
@@ -53,13 +55,30 @@ class Coordenador extends Component {
         let token = localStorage.getItem("token");
         let name = localStorage.getItem("name");
         let user_id = localStorage.getItem("user_id")
+        let course = localStorage.getItem("course");
+        if (course != '') {
+            this.setState({ title: course })
+            this.state.temCurso = true
+        } else {
+            this.setState({ title: "Sem curso" })
+        }
 
         this.setState({ name: name })
+
+
+
+        if (!this.state.temCurso) {
+            document.getElementsByClassName("item-coordenador-conta")[0].classList.add("active")
+            document.getElementsByClassName("item-coordenador-disciplina")[0].remove();
+            document.getElementsByClassName("item-coordenador-monitor")[0].remove();
+            document.getElementById("view_disciplinas").classList.add("hide")
+            document.getElementById("view_conta").classList.remove("hide")
+        }
+
 
     }
 
     render() {
-
 
 
 
@@ -70,7 +89,7 @@ class Coordenador extends Component {
                     <Logo />
 
                     <div className="title">
-                        Coordenador
+                        {this.state.title}
                     </div>
                     <div className="user" onClick={() => this.showUserOpcoes()}>
                         <div>
@@ -79,7 +98,7 @@ class Coordenador extends Component {
                         <div id="adm-op" >
                             <p id="name_coordenador">{this.state.name}</p>
                             <div id="opcoes" className="hide">
-                                <div onClick={() => this.logout()}>
+                                <div className="logout" onClick={() => this.logout()}>
                                     sair
                                 </div>
                             </div>
@@ -89,12 +108,21 @@ class Coordenador extends Component {
 
                 <div className="content">
                     <div className="aside">
+
                         <div className="title">
                             <p>Opções do Coordenador</p>
                         </div>
                         <div className="item item-coordenador-disciplina active" onClick={() => this.clickDisciplinas()} >
                             <p>Gerenciar Disciplinas</p>
                         </div>
+                        <div className="item item-coordenador-monitor">
+                            <p>Gerenciar Monitores</p>
+                        </div>
+
+                        <script>
+
+                        </script>
+
                         <div className="item item-coordenador-conta" onClick={() => this.clickConta()} >
                             <p>Minha Conta</p>
                         </div>

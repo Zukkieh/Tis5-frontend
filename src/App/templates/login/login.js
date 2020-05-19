@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { AdminService } from '../../services/adminService';
 
 import './login.scss'
 
@@ -38,15 +39,45 @@ class login extends Component {
         localStorage.setItem("type_user", "adm")
         localStorage.setItem("token", res.data.token)
         window.open('/admin', '_self')
+
+
+
+
+
+
       } else if (res.data.user_type == "Coordenador(a)") {
         localStorage.setItem("type_user", res.data.user_type)
         localStorage.setItem("token", res.data.token)
-        localStorage.setItem("course_id", res.data.data.course.id)
+        try {
+          localStorage.setItem("course_id", res.data.data.course.id)
+        }
+        catch (e) {
+
+        }
+
         localStorage.setItem("id", res.data.data.id)
         localStorage.setItem("user_id", res.data.data.user_id)
         localStorage.setItem("name", res.data.data.name)
-        console.log(res.data);
-        window.open('/coordenador/ ', '_self')
+
+
+        let c = new AdminService().listarCursos(1, 99999);
+        c.then(res2 => {
+
+          let total = res2.data.total;
+
+
+          for (let i = 0; i < total; i++) {
+            if (res.data.data.course != null && res2.data.data[i].id == res.data.data.course.id) {
+              localStorage.setItem("course", res2.data.data[i].name)
+            }
+          }
+          if (res.data.data.course == null) {
+            localStorage.setItem("course", "");
+          }
+
+          window.open('/coordenador/ ', '_self')
+        })
+
       }
 
       div_login.classList.remove('show-loading')
@@ -54,7 +85,15 @@ class login extends Component {
       try {
         alert(err.response.data[0].message)
       } catch (e) {
-        alert(err.message)
+        try {
+          alert(err.response.data.message)
+        } catch (e) {
+          try {
+            alert(err.message)
+          } catch (e) {
+
+          }
+        }
       }
       console.log(err.response.data)
       div_login.classList.remove('show-loading')
@@ -80,11 +119,14 @@ class login extends Component {
 
             <button onClick={() => this.login()}>Logar</button>
 
+            {
+              /*
             <div className="cadastroLink" onClick={() => window.open("/cadastro", "_self")}>
 
               <a to="/cadastro">Crie sua conta </a>
             </div>
-
+            */
+            }
           </div>
         </div>
       </div>

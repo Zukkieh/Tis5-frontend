@@ -19,7 +19,12 @@ class Coordenador_conta extends Component {
             document.getElementsByClassName("Coordenador_conta")[0].classList.remove("show-loading");
 
         }).catch(err => {
-            alert("Não foi possível alterar a senha. " + err.response.data.errors[0].message)
+            try {
+                alert(err.response.data.errors[0].message)
+            } catch (e) {
+                alert(err.response.data.message)
+            }
+
             console.log(err.response)
             document.getElementsByClassName("Coordenador_conta")[0].classList.remove("show-loading");
         })
