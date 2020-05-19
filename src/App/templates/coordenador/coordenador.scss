@@ -389,6 +389,7 @@
         text-decoration: underline !important;
       }
       & .page,
+      .page2,
       .pageCourse {
         text-decoration: none;
         margin-right: 10px;
@@ -550,6 +551,15 @@
 
           &:hover {
             background-color: rgb(35, 138, 223);
+          }
+        }
+
+        & button.monitores {
+          margin-top: 15px;
+          background-color: rgb(73, 255, 97);
+
+          &:hover {
+            background-color: rgb(66, 223, 35);
           }
         }
 

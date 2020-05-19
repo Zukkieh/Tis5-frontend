@@ -231,7 +231,7 @@ class Disciplinas extends Component {
                             </div>
                             <div className="footer">
                                 <button className="cadastrar" type="button" onClick={() => this.editarDisciplina()}>Alterar dados</button>
-
+                                <button className="monitores" type="button">Gerenciar monitores</button>
                                 <a href="javascript:void(0)" onClick={() => this.hideEditDisciplina()} >Voltar</a>
                             </div>
                         </form>

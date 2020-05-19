@@ -4,6 +4,7 @@ import Logo from '../components/logo/logo'
 import Coordenador_Conta from './coordenador_conta/conta';
 import Disciplinas from './disciplinas/disciplinas';
 
+
 class Coordenador extends Component {
 
     constructor() {
@@ -27,15 +28,19 @@ class Coordenador extends Component {
     clickConta() {
         document.getElementsByClassName("item-coordenador-conta")[0].classList.add("active");
         document.getElementsByClassName("item-coordenador-disciplina")[0].classList.remove("active");
+        // document.getElementsByClassName("item-coordenador-monitor")[0].classList.remove("active");
         document.getElementById("view_conta").classList.remove("hide")
         document.getElementById("view_disciplinas").classList.add("hide")
+        //document.getElementById("view_monitores").classList.add("hide")
     }
 
     clickDisciplinas() {
         document.getElementsByClassName("item-coordenador-conta")[0].classList.remove("active");
         document.getElementsByClassName("item-coordenador-disciplina")[0].classList.add("active");
+        //document.getElementsByClassName("item-coordenador-monitor")[0].classList.remove("active");
         document.getElementById("view_conta").classList.add("hide")
         document.getElementById("view_disciplinas").classList.remove("hide")
+        // document.getElementById("view_monitores").classList.add("hide")
     }
 
     componentDidMount() {
@@ -115,14 +120,6 @@ class Coordenador extends Component {
                         <div className="item item-coordenador-disciplina active" onClick={() => this.clickDisciplinas()} >
                             <p>Gerenciar Disciplinas</p>
                         </div>
-                        <div className="item item-coordenador-monitor">
-                            <p>Gerenciar Monitores</p>
-                        </div>
-
-                        <script>
-
-                        </script>
-
                         <div className="item item-coordenador-conta" onClick={() => this.clickConta()} >
                             <p>Minha Conta</p>
                         </div>
