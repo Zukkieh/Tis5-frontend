@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './coordenador.scss'
 import Logo from '../components/logo/logo'
 import Coordenador_Conta from './coordenador_conta/conta';
 import Disciplinas from './disciplinas/disciplinas';
@@ -123,9 +122,11 @@ class Coordenador extends Component {
                         </div>
                     </div>
 
-                    <div className="main admin_controls">
-                        <Disciplinas />
-                        <Coordenador_Conta />
+                    <div className="main ">
+                        <div className="admin_controls">
+                            <Disciplinas />
+                            <Coordenador_Conta />
+                        </div>
                     </div>
                 </div>
 

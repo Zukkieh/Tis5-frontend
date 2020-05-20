@@ -169,7 +169,7 @@ class Disciplinas extends Component {
 
     }
 
-    showMonitores(){
+    showMonitores() {
         document.getElementsByClassName("form-edit-disciplina")[0].classList.add("hide")
         document.getElementsByClassName("div_monitores")[0].classList.remove("hide")
         let nameDisc = document.getElementById("edit_name").value;
@@ -177,57 +177,57 @@ class Disciplinas extends Component {
         this.listarMonitores();
     }
 
-    hideMonitores(){
+    hideMonitores() {
         document.getElementsByClassName("form-edit-disciplina")[0].classList.remove("hide")
         document.getElementsByClassName("div_monitores")[0].classList.add("hide")
     }
 
-    listarMonitores(){
+    listarMonitores() {
         let disciplina_id = document.getElementById("disciplina_id").value;
         let response = new CoordenadorService().listarMonitores(disciplina_id);
         document.getElementsByClassName("results_monitores")[0].classList.add("show-loading")
-        response.then(res =>{
-            this.setState({Monitores:res.data.data})
+        response.then(res => {
+            this.setState({ Monitores: res.data.data })
             console.log(res.data)
-            if(res.data.total == 0){
+            if (res.data.total == 0) {
                 alert("Essa disciplina ainda não possui monitores")
             }
             document.getElementsByClassName("results_monitores")[0].classList.remove("show-loading")
         })
     }
 
-    listarAlunos(){
+    listarAlunos() {
         let response = new CoordenadorService().listarAlunos(localStorage.getItem("course_id"));
 
-        response.then(res=>{
-            this.setState({Alunos: res.data.data})
+        response.then(res => {
+            this.setState({ Alunos: res.data.data })
         })
     }
 
-    showFormCadastroMonitor(){
+    showFormCadastroMonitor() {
         this.listarAlunos()
         document.getElementsByClassName("form-cadastro-monitor")[0].classList.remove("hide");
         document.getElementById("disciplina_nome_cadastro").innerHTML = document.getElementById("edit_name").value
         document.getElementsByClassName("div_monitores")[0].classList.add("hide")
     }
-    hideFormCadastroMonitor(){
+    hideFormCadastroMonitor() {
         this.listarMonitores();
         document.getElementsByClassName("form-cadastro-monitor")[0].classList.add("hide");
         document.getElementsByClassName("div_monitores")[0].classList.remove("hide")
     }
 
-    cadastrarMonitor(){
+    cadastrarMonitor() {
         let id_student = document.getElementById("student").value;
         let workLoad = document.getElementById("workload").value;
         let disciplina_id = document.getElementById("disciplina_id").value;
 
         let response = new CoordenadorService().cadastrarMonitor(disciplina_id, id_student, workLoad);
 
-        response.then(res =>{
+        response.then(res => {
             this.showMonitores();
             this.hideFormCadastroMonitor();
         })
-        response.catch(err =>{
+        response.catch(err => {
             console.log(err.response)
         })
 
@@ -256,10 +256,10 @@ class Disciplinas extends Component {
                             <div><strong>Turno</strong></div>
                         </div>
                         {this.state.Disciplinas.map((disciplina) => (
-                            <div className="result_item" onClick={() => this.showEditDisciplina(disciplina)}>
+                            <a href={"disciplinas/" + disciplina.id} target="_self" className="result_item">
                                 <div>{disciplina.name}</div>
                                 <div>{disciplina.shift}</div>
-                            </div>
+                            </a>
                         ))}
                     </div>
                     <div className="hide form form-edit-disciplina">
@@ -316,14 +316,14 @@ class Disciplinas extends Component {
                                 <div><strong>Cód. pessoa</strong></div>
                             </div>
                             {
-                                
-                            this.state.Monitores.map((monitor) => (
-                                <div className="result_item">
-                                    <div>{monitor.student.user.name}</div>
-                                    <div>{monitor.student.user.person_code}</div>
-                                </div>
-                            ))
-                            
+
+                                this.state.Monitores.map((monitor) => (
+                                    <div className="result_item">
+                                        <div>{monitor.student.user.name}</div>
+                                        <div>{monitor.student.user.person_code}</div>
+                                    </div>
+                                ))
+
                             }
                         </div>
                     </div>
@@ -344,11 +344,11 @@ class Disciplinas extends Component {
                                     <label htmlFor="student">Aluno</label>
                                     <select id="student">
                                         {
-                                            this.state.Alunos.map((aluno)=> {
-                                                if(!aluno.is_monitor)
-                                                return <option value={aluno.id} >{aluno.name}</option>
+                                            this.state.Alunos.map((aluno) => {
+                                                if (!aluno.is_monitor)
+                                                    return <option value={aluno.id} >{aluno.name}</option>
                                             }
-                                            ) 
+                                            )
                                         }
                                     </select>
                                 </div>

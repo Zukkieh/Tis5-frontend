@@ -33,7 +33,7 @@ class Coordenador_conta extends Component {
     render() {
 
         return (
-            <div id="view_conta" className=" hide admin_controls_comp">
+            <div id="view_conta" className="admin_controls_comp">
                 <div>
 
                     <div className="Coordenador_conta">

@@ -75,7 +75,7 @@ class login extends Component {
             localStorage.setItem("course", "");
           }
 
-          window.open('/coordenador/ ', '_self')
+          window.open('/coordenador/disciplinas ', '_self')
         })
 
       }

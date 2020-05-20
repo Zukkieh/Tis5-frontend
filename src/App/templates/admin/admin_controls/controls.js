@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import './controls.scss';
 import { AdminService } from '../../../services/adminService';
 import Coordenadores from './coordenadores/coordenadores';
 import Cursos from './cursos/cursos'

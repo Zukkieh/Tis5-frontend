@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './admin.scss'
 import Logo from '../components/logo/logo'
 import Admin_Controls from './admin_controls/controls';
 
