@@ -8,7 +8,8 @@ class Disciplinas extends Component {
             course_id: localStorage.getItem("course_id"),
             Disciplinas: [],
             paginationPages: [],
-            Monitores: []
+            Monitores: [],
+            Alunos: []
         }
         console.clear()
 
@@ -184,13 +185,51 @@ class Disciplinas extends Component {
     listarMonitores(){
         let disciplina_id = document.getElementById("disciplina_id").value;
         let response = new CoordenadorService().listarMonitores(disciplina_id);
-
+        document.getElementsByClassName("results_monitores")[0].classList.add("show-loading")
         response.then(res =>{
             this.setState({Monitores:res.data.data})
-            console.log(res.data.data)
+            console.log(res.data)
+            if(res.data.total == 0){
+                alert("Essa disciplina ainda não possui monitores")
+            }
+            document.getElementsByClassName("results_monitores")[0].classList.remove("show-loading")
         })
+    }
 
+    listarAlunos(){
+        let response = new CoordenadorService().listarAlunos(localStorage.getItem("course_id"));
 
+        response.then(res=>{
+            this.setState({Alunos: res.data.data})
+        })
+    }
+
+    showFormCadastroMonitor(){
+        this.listarAlunos()
+        document.getElementsByClassName("form-cadastro-monitor")[0].classList.remove("hide");
+        document.getElementById("disciplina_nome_cadastro").innerHTML = document.getElementById("edit_name").value
+        document.getElementsByClassName("div_monitores")[0].classList.add("hide")
+    }
+    hideFormCadastroMonitor(){
+        this.listarMonitores();
+        document.getElementsByClassName("form-cadastro-monitor")[0].classList.add("hide");
+        document.getElementsByClassName("div_monitores")[0].classList.remove("hide")
+    }
+
+    cadastrarMonitor(){
+        let id_student = document.getElementById("student").value;
+        let workLoad = document.getElementById("workload").value;
+        let disciplina_id = document.getElementById("disciplina_id").value;
+
+        let response = new CoordenadorService().cadastrarMonitor(disciplina_id, id_student, workLoad);
+
+        response.then(res =>{
+            this.showMonitores();
+            this.hideFormCadastroMonitor();
+        })
+        response.catch(err =>{
+            console.log(err.response)
+        })
 
     }
 
@@ -268,7 +307,7 @@ class Disciplinas extends Component {
                                 <p>Listando os monitores de  <strong><span id="disciplina_monitor"></span></strong></p>
                             </div>
                             <div className="icon fa-plus div-btn-show-form-cadastro-coordenador">
-                                <button >Novo monitor</button>
+                                <button onClick={() => this.showFormCadastroMonitor()}>Novo monitor</button>
                             </div>
                         </div>
                         <div className="results results_monitores">
@@ -287,6 +326,39 @@ class Disciplinas extends Component {
                             
                             }
                         </div>
+                    </div>
+                    <div className="hide form form-cadastro-monitor">
+                        <form>
+                            <div className="header">
+                                <p>Novo monitor de <span id="disciplina_nome_cadastro"></span></p>
+                            </div>
+                            <div className="body">
+                                <div className="column">
+                                    <label htmlFor="workLoad">Carga horária</label>
+                                    <select id="workload">
+                                        <option>10</option>
+                                        <option>20</option>
+                                    </select>
+                                </div>
+                                <div className="column">
+                                    <label htmlFor="student">Aluno</label>
+                                    <select id="student">
+                                        {
+                                            this.state.Alunos.map((aluno)=> {
+                                                if(!aluno.is_monitor)
+                                                return <option value={aluno.id} >{aluno.name}</option>
+                                            }
+                                            ) 
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="footer">
+                                <button className="cadastrar" type="button" onClick={() => this.cadastrarMonitor()}>Cadastrar</button>
+
+                                <a href="javascript:void(0)" onClick={() => this.hideFormCadastroMonitor()} >Voltar</a>
+                            </div>
+                        </form>
                     </div>
                     <div className="hide form form-cadastro-disciplina">
                         <form>
