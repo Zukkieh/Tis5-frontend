@@ -30,12 +30,12 @@ class Asside extends Component {
                 <div className="title">
                     <p>Opções do Coordenador</p>
                 </div>
-                <Link to="disciplinas" className="item item-coordenador-disciplina">
+                <Link to="/coordenador/disciplinas" className="item item-coordenador-disciplina">
 
                     <p>Gerenciar Disciplinas</p>
 
                 </Link>
-                <Link to="conta" className="item item-coordenador-conta">
+                <Link to="/coordenador/conta" className="item item-coordenador-conta">
 
                     <p>Minha Conta</p>
 
