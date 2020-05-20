@@ -5,7 +5,7 @@ class Coordenador_conta extends Component {
 
     async updatePassword() {
         document.getElementsByClassName("Coordenador_conta")[0].classList.add("show-loading");
-        let id = localStorage.getItem("id")
+
         let user_id = localStorage.getItem("user_id");
         let token = localStorage.getItem("token");
         let password = document.getElementById("newPass").value

@@ -1,6 +1,6 @@
 import React, { Component } from 'react/'
 import { CoordenadorService } from '../../../services/coordenadorService'
-import { matchPath } from 'react-router-dom';
+
 
 class Edit_disciplina extends Component {
 
@@ -75,7 +75,7 @@ class Edit_disciplina extends Component {
                             </div>
                             <div className="footer">
                                 <button className="cadastrar" type="button" onClick={() => this.atualizarDisciplina()}>Alterar dados</button>
-                                <button className="monitores" type="button" onClick={() => this.showMonitores()} >Gerenciar monitores</button>
+                                <button className="monitores" type="button" onClick={() => window.open("monitores/", "_self")} >Gerenciar monitores</button>
                                 <a href="javascript:void(0)" onClick={() => window.open("/coordenador/disciplinas", "_self")} >Voltar</a>
                             </div>
                         </form>

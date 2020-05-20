@@ -9,10 +9,13 @@ class Asside extends Component {
     }
 
     componentDidMount() {
-        let active = this.props.active;
-        document.getElementsByClassName(active)[0].classList.add("active");
-        let hide = this.props.hide
+
         try {
+
+            let active = this.props.active;
+            document.getElementsByClassName(active)[0].classList.add("active");
+            let hide = this.props.hide
+
             if (hide != null || hide != undefined) {
                 document.getElementsByClassName(hide)[0].classList.add("hide")
             }

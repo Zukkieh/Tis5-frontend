@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Title from './components/title';
 import Asside from './components/asside';
-import Edit from './disciplinas/edit'
+import New from './disciplinas/new'
 
-class Coordenador_disciplinas_edit extends Component {
+class Coordenador_disciplinas_new extends Component {
 
 
 
     componentDidMount() {
-
         let course = localStorage.getItem("course");
         if (course == '') {
             window.open("conta", "_self")
@@ -20,10 +19,10 @@ class Coordenador_disciplinas_edit extends Component {
             <div className="admin">
                 <Title />
                 <div className="content">
-                    <Asside />
+                    <Asside active="item-coordenador-disciplina" />
                     <div className="main">
                         <div className="admin_controls">
-                            <Edit id={this.props.match.params.id} />
+                            <New />
                         </div>
                     </div>
                 </div>
@@ -32,4 +31,4 @@ class Coordenador_disciplinas_edit extends Component {
     }
 }
 
-export default Coordenador_disciplinas_edit;
+export default Coordenador_disciplinas_new;

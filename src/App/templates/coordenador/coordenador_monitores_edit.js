@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Title from './components/title';
 import Asside from './components/asside';
-import Edit from './disciplinas/edit'
+import Monitores_edit from './monitores/edit'
 
-class Coordenador_disciplinas_edit extends Component {
+class Coordenador_monitores_edit extends Component {
+
 
 
 
@@ -23,7 +24,7 @@ class Coordenador_disciplinas_edit extends Component {
                     <Asside />
                     <div className="main">
                         <div className="admin_controls">
-                            <Edit id={this.props.match.params.id} />
+                            <Monitores_edit id_disciplina={this.props.match.params.id} id_monitor={this.props.match.params.id_monitor} />
                         </div>
                     </div>
                 </div>
@@ -32,4 +33,4 @@ class Coordenador_disciplinas_edit extends Component {
     }
 }
 
-export default Coordenador_disciplinas_edit;
+export default Coordenador_monitores_edit;

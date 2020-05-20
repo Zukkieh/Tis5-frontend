@@ -5,8 +5,12 @@ import login from '../templates/login/login';
 import cadastro from '../templates/cadastro/cadastro';
 import admin from '../templates/admin/admin';
 import coordenador_disciplinas from '../templates/coordenador/coordenador_disciplinas';
+import coordenador_monitores from '../templates/coordenador/coordenador_monitores';
 import coordenador_conta from '../templates/coordenador/coordenador_conta';
 import Coordenador_disciplinas_edit from '../templates/coordenador/coordenador_disciplinas_edit'
+import Coordenador_disciplinas_new from '../templates/coordenador/coordenador_disciplinas_new'
+import Coordenador_monitores_new from '../templates/coordenador/coordenador_monitores_new'
+import Coordenador_monitores_edit from '../templates/coordenador/coordenador_monitores_edit'
 
 class Routes extends Component {
   render() {
@@ -27,6 +31,10 @@ class Routes extends Component {
         <Route exact path="/coordenador/disciplinas" component={coordenador_disciplinas} />
         <Route exact path="/coordenador/conta" component={coordenador_conta} />
         <Route exact path="/coordenador/disciplinas/:id" component={Coordenador_disciplinas_edit} />
+        <Route exact path="/coordenador/disciplina/nova" component={Coordenador_disciplinas_new} />
+        <Route exact path="/coordenador/disciplinas/:id/monitores/" component={coordenador_monitores} />
+        <Route exact path="/coordenador/disciplinas/:id/monitores/novo" component={Coordenador_monitores_new} />
+        <Route exact path="/coordenador/disciplinas/:id/monitores/details/:id_monitor" component={Coordenador_monitores_edit} />
 
       </Router>
     );
