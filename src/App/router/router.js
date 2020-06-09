@@ -11,6 +11,7 @@ import Coordenador_disciplinas_edit from '../templates/coordenador/coordenador_d
 import Coordenador_disciplinas_new from '../templates/coordenador/coordenador_disciplinas_new'
 import Coordenador_monitores_new from '../templates/coordenador/coordenador_monitores_new'
 import Coordenador_monitores_edit from '../templates/coordenador/coordenador_monitores_edit'
+import Relatorio from '../templates/coordenador/monitores/relatorio';
 
 class Routes extends Component {
   render() {
@@ -35,6 +36,7 @@ class Routes extends Component {
         <Route exact path="/coordenador/disciplinas/:id/monitores/" component={coordenador_monitores} />
         <Route exact path="/coordenador/disciplinas/:id/monitores/novo" component={Coordenador_monitores_new} />
         <Route exact path="/coordenador/disciplinas/:id/monitores/details/:id_monitor" component={Coordenador_monitores_edit} />
+        <Route exact path="/coordenador/disciplinas/:id/monitores/details/:id_monitor/relatorio" component={Relatorio} />
 
       </Router>
     );

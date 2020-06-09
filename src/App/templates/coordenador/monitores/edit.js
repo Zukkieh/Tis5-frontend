@@ -14,19 +14,21 @@ class Edit_monitor extends Component {
 
 
     apagarMonitor() {
-        document.getElementById("view_disciplinas").classList.add("show-loading")
-        let response = new CoordenadorService().apagarMonitor(this.props.id_monitor);
+        let apagar = window.confirm("Voce realmente deseja apagar o monitor " + this.state.Aluno.name)
+        if (apagar) {
+            document.getElementById("view_disciplinas").classList.add("show-loading")
+            let response = new CoordenadorService().apagarMonitor(this.props.id_monitor);
 
-        response.then(res => {
-            alert("Monitor apagado")
-            window.open("/coordenador/disciplinas/" + this.props.id_disciplina + "/monitores/", "_self")
-        })
-        response.catch(err => {
-            console.log(err.response)
-            alert(err.response.data.errors[0].message)
-            document.getElementById("view_disciplinas").classList.remove("show-loading")
-        })
-
+            response.then(res => {
+                alert("Monitor apagado")
+                window.open("/coordenador/disciplinas/" + this.props.id_disciplina + "/monitores/", "_self")
+            })
+            response.catch(err => {
+                console.log(err.response)
+                alert(err.response.data.errors[0].message)
+                document.getElementById("view_disciplinas").classList.remove("show-loading")
+            })
+        }
     }
 
     carregarAluno(id_student) {
@@ -96,6 +98,7 @@ class Edit_monitor extends Component {
                                 </div>
                             </div>
                             <div className="footer">
+                                <button className="monitores" type="button" onClick={() => window.open("relatorio", "_blank")}>Exibir Relatório</button>
                                 <button className="cancelar" type="button" onClick={() => this.apagarMonitor()}>Apagar Monitor</button>
                                 <a href="javascript:void(0)" onClick={() => window.open("/coordenador/disciplinas/" + this.props.id_disciplina + "/monitores/", "_self")} >Voltar</a>
                             </div>

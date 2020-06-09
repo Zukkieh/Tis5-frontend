@@ -76,13 +76,13 @@ class admin extends Component {
                             <p>Opções do Administrador</p>
                         </div>
 
-                        <div className="item item-curso" onClick={() => this.clickCursos()}>
+                        <a className="item item-curso" onClick={() => this.clickCursos()}>
                             <p>Gerenciar Cursos</p>
-                        </div>
+                        </a>
 
-                        <div className="item item-coordenador active" onClick={() => this.clickCoordenadores()}>
+                        <a className="item item-coordenador active" onClick={() => this.clickCoordenadores()}>
                             <p>Gerenciar Coordenadores</p>
-                        </div>
+                        </a>
                     </div>
 
                     <div className="main">

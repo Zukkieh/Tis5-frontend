@@ -608,3 +608,148 @@
 .no-bg {
   background-color: transparent !important;
 }
+
+.relatorio {
+  background-color: #fff;
+  border-radius: 15px;
+  width: 90%;
+  min-height: calc(100vh - 110px);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  position: relative;
+  &.show-loading {
+    border-radius: 15px;
+  }
+
+  & .title {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    & p {
+      font-family: "ms-yahei-bold";
+      font-size: 28px;
+    }
+    & small {
+      font-family: "ms-yahei";
+      font-size: 18px;
+    }
+    & .user-data {
+      display: flex;
+      justify-content: space-around;
+      min-width: 60%;
+      @media (max-width: 992px) {
+        flex-wrap: wrap;
+      }
+      & p {
+        font-family: "ms-jhenghei";
+        font-size: 16px;
+        font-weight: bold;
+        & span {
+          font-weight: 100;
+        }
+      }
+    }
+  }
+
+  & .body {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 992px) {
+      margin-bottom: 100px;
+    }
+    & .data {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 40%;
+
+      & .title {
+        display: flex;
+        justify-content: center;
+        & p {
+          margin-bottom: 0 !important;
+        }
+      }
+      & .content {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        @media (max-width: 992px) {
+          flex-flow: column;
+        }
+        & p {
+          font-weight: bold;
+          &.color:before {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            position: absolute;
+            margin-left: -26px;
+            content: "";
+          }
+          &.pendente:before {
+            background-color: rgb(81, 133, 168);
+          }
+          &.confirmado:before {
+            background-color: rgb(80, 153, 125);
+          }
+          &.negado:before {
+            background-color: rgb(180, 87, 87);
+          }
+          &.total:before {
+            background-color: rgb(207, 204, 19);
+          }
+        }
+        & span {
+          font-weight: 100;
+        }
+      }
+
+      & .graphic {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        height: 10px;
+        & div {
+          min-height: 10px;
+          &.pendente {
+            background-color: rgb(81, 133, 168);
+          }
+          &.confirmado {
+            background-color: rgb(80, 153, 125);
+          }
+          &.negado {
+            background-color: rgb(180, 87, 87);
+          }
+          &.total {
+            background-color: rgb(207, 204, 19);
+          }
+        }
+      }
+    }
+  }
+
+  & .footer {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+
+    & button.red {
+      cursor: pointer;
+      background-color: rgb(253, 46, 46);
+      border: none;
+      color: white;
+      padding: 15px 45px;
+      border-radius: 15px;
+      transition: 0.2s;
+      &:hover {
+        background-color: rgb(218, 0, 0);
+      }
+    }
+  }
+}

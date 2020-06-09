@@ -56,7 +56,7 @@ class Monitores extends Component {
                             {
 
                                 this.state.Monitores.map((monitor) => (
-                                    <div className="result_item" onClick={() => window.open("details/" + monitor.id, "_self")}>
+                                    <div className="result_item" onClick={() => window.open("details/" + monitor.id + "/", "_self")}>
                                         <div>{monitor.student.user.name}</div>
                                         <div>{monitor.student.user.person_code}</div>
                                     </div>
