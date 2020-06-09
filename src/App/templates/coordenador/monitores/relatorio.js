@@ -7,7 +7,10 @@ class Relatorio extends Component {
         this.state = {
             attendanceData: [],
             studentData: [],
-            userData: []
+            userData: [],
+            disciplinaData: [],
+            courseData: [],
+            coordenadorData: []
         }
 
     }
@@ -25,6 +28,9 @@ class Relatorio extends Component {
                             this.setState({ attendanceData: monitor.__meta__ });
                             this.setState({ studentData: monitor.student });
                             this.setState({ userData: monitor.student.user });
+                            this.setState({ disciplinaData: disciplina });
+                            this.setState({ courseData: res.data[0] })
+                            this.setState({ coordenadorData: res.data[0].coordinator.user })
                             document.getElementsByClassName("relatorio")[0].classList.remove("show-loading")
 
                             let req_pendente_p = (this.state.attendanceData.pending_requests / this.state.attendanceData.total_requests) * 100;
@@ -51,13 +57,25 @@ class Relatorio extends Component {
         return (
             <div className="relatorio show-loading">
                 <div className="title">
+                    <p>{this.state.courseData.name} - {this.state.courseData.campus}</p>
                     <p>Relatório de Monitoria</p>
-                    <small>{this.state.userData.name}</small>
-                    <div className="user-data">
-                        <p>Matrícula: <span>{this.state.studentData.registration}</span></p>
-                        <p>Cód. Pessoa: <span>{this.state.userData.person_code}</span></p>
-                        <p>Telefone: <span>{this.state.studentData.phone}</span></p>
-                        <p>E-mail: <span>{this.state.userData.email}</span></p>
+                    <div className="coordinator-data data">
+                        <p>Dados do(a) Coordenador(a):</p>
+                        <div className="user-data">
+                            <p>Nome: <span>{this.state.coordenadorData.name}</span></p>
+                            <p>E-mail: <span>{this.state.coordenadorData.email}</span></p>
+
+                        </div>
+                    </div>
+                    <div className="monitor-data data">
+                        <p>Dados do Monitor:</p>
+                        <small>{this.state.userData.name} - {this.state.disciplinaData.name} ({this.state.disciplinaData.shift})</small>
+                        <div className="user-data">
+                            <p>Matrícula: <span>{this.state.studentData.registration}</span></p>
+                            <p>Cód. Pessoa: <span>{this.state.userData.person_code}</span></p>
+                            <p>Telefone: <span>{this.state.studentData.phone}</span></p>
+                            <p>E-mail: <span>{this.state.userData.email}</span></p>
+                        </div>
                     </div>
                 </div>
                 <div className="body">
