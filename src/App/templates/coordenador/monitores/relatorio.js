@@ -58,91 +58,95 @@ class Relatorio extends Component {
                 </header>
                 <div>
                     <div className="title">
-                        <header>
-                            <p>Dados do monitor</p>
-                        </header>
-                        <div className="row">
-                            <div className="key">
-                                <p>Nome:</p>
+                        <div className="separator">
+                            <header>
+                                <p>Dados do monitor</p>
+                            </header>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Nome:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.userData.name}</p>
+                                </div>
                             </div>
-                            <div className="value">
-                                <p>{this.state.userData.name}</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Matrícula:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.studentData.registration}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="key">
-                                <p>Matrícula:</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Cód. Pessoa:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.userData.person_code}</p>
+                                </div>
                             </div>
-                            <div className="value">
-                                <p>{this.state.studentData.registration}</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>E-mail:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.userData.email}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="key">
-                                <p>Cód. Pessoa:</p>
-                            </div>
-                            <div className="value">
-                                <p>{this.state.userData.person_code}</p>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="key">
-                                <p>E-mail:</p>
-                            </div>
-                            <div className="value">
-                                <p>{this.state.userData.email}</p>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="key">
-                                <p>Telefone:</p>
-                            </div>
-                            <div className="value">
-                                <p>{this.state.studentData.phone}</p>
-                            </div>
-                        </div>
-                        <header>
-                            <p>Dados do curso</p>
-                        </header>
-                        <div className="row">
-                            <div className="key">
-                                <p>Curso:</p>
-                            </div>
-                            <div className="value">
-                                <p>{this.state.courseData.name}</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Telefone:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.studentData.phone}</p>
+                                </div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="key">
-                                <p>Campus:</p>
+                        <div className="separator">
+                            <header>
+                                <p>Dados do curso</p>
+                            </header>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Curso:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.courseData.name}</p>
+                                </div>
                             </div>
-                            <div className="value">
-                                <p>{this.state.courseData.campus}</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Campus:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.courseData.campus}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="key">
-                                <p>Disciplina:</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Disciplina:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.disciplinaData.name}</p>
+                                </div>
                             </div>
-                            <div className="value">
-                                <p>{this.state.disciplinaData.name}</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Turno:</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.disciplinaData.shift}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="key">
-                                <p>Turno:</p>
-                            </div>
-                            <div className="value">
-                                <p>{this.state.disciplinaData.shift}</p>
-                            </div>
-                        </div>
 
-                        <div className="row">
-                            <div className="key">
-                                <p>Coordenador(a):</p>
-                            </div>
-                            <div className="value">
-                                <p>{this.state.coordenadorData.name}</p>
+                            <div className="row">
+                                <div className="key">
+                                    <p>Coordenador(a):</p>
+                                </div>
+                                <div className="value">
+                                    <p>{this.state.coordenadorData.name}</p>
+                                </div>
                             </div>
                         </div>
 

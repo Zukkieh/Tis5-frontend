@@ -612,14 +612,12 @@
 .relatorio {
   background-color: #fff;
   width: 60%;
-  height: calc(90vh);
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: auto;
-  //padding: 15px 0;
+  padding: 15px 0;
   border-radius: 15px;
   @media (max-width: 992px) {
     height: auto;
@@ -643,41 +641,50 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 35%;
+    width: 100%;
     @media (max-width: 992px) {
       width: 100%;
     }
     & .title {
       width: 100%;
-      & header {
-        & p {
-          text-align: center;
-          // border-bottom: 2px solid black;
-          margin: 0;
-          padding: 5px 0;
-          font-size: 18px;
-          font-weight: bold;
-        }
+      display: flex;
+      justify-content: space-around;
+      @media (max-width: 992px) {
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
       }
-      & .row {
-        display: flex;
-        justify-content: start;
-        width: 100%;
-        //  border-bottom: 2px solid black;
-        & .key,
-        .value {
+      & .separator {
+        & header {
           & p {
+            text-align: center;
+            // border-bottom: 2px solid black;
             margin: 0;
+            padding: 5px 0;
+            font-size: 18px;
+            font-weight: bold;
           }
         }
-        & .key {
-          //border-right: 1px solid black;
-          text-align: right;
-          font-weight: 600;
-        }
-        & .value {
-          text-align: left;
-          margin-left: 10px;
+        & .row {
+          display: flex;
+          justify-content: start;
+          width: 100%;
+          //  border-bottom: 2px solid black;
+          & .key,
+          .value {
+            & p {
+              margin: 0;
+            }
+          }
+          & .key {
+            //border-right: 1px solid black;
+            text-align: right;
+            font-weight: 600;
+          }
+          & .value {
+            text-align: left;
+            margin-left: 10px;
+          }
         }
       }
     }
