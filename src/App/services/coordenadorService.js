@@ -44,7 +44,7 @@ export class CoordenadorService {
         return axios.delete('https://tis5-backend.herokuapp.com/monitor/' + monitor_id, { headers: { Authorization: "Bearer " + localStorage.getItem('token') } })
     }
 
-    async carregarRelatorio(course_id) {
-        return axios.get('https://tis5-backend.herokuapp.com/course/' + course_id + "/report", { headers: { Authorization: "Bearer " + localStorage.getItem('token') } })
+    async carregarRelatorio(monitor_id) {
+        return axios.get('https://tis5-backend.herokuapp.com/monitor/' + monitor_id + "/report", { headers: { Authorization: "Bearer " + localStorage.getItem('token') } })
     }
 }
